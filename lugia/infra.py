@@ -1,4 +1,5 @@
 import json
+from dataclasses import dataclass, field, asdict  # Correctly import asdict here
 from datetime import datetime
 from dotenv import load_dotenv
 import uuid
@@ -6,6 +7,7 @@ import os
 from loguru import logger
 import fire
 import litellm
+from typing import List
 
 # Load environment variables
 load_dotenv()
@@ -16,99 +18,75 @@ anthropic_key = os.getenv('ANTHROPIC_API_KEY')
 litellm.openai_key = openai_key
 litellm.anthropic_key = anthropic_key
 
-# Set verbose (troubleshooting)
-#litellm.set_verbose= True
-
 history_file = "conversation_history.json"
 
 model_shortcuts = {
     "claude-3-haiku": "claude-3-haiku-20240307",
-    "claude-3-opus" : "claude-3-opus-20240229",
-    "claude-3-sonnet" : "claude-3-sonnet-20240229",
-    "claude-2" : 'claude-2.1',
+    "claude-3-opus": "claude-3-opus-20240229",
+    "claude-3-sonnet": "claude-3-sonnet-20240229",
+    "claude-2": 'claude-2.1',
     "gpt-4": "gpt-4-turbo-preview",
-    "gpt-3.5" : "gpt-3.5-turbo",
-    # Add more mappings as needed
+    "gpt-3.5": "gpt-3.5-turbo",
 }
 
+@dataclass
+class Message:
+    id: str
+    role: str
+    content: str
+    timestamp: str
 
+@dataclass
 class LiteLLMConversation:
-    def __init__(self, model, max_tokens=4096):
-        self.model = model_shortcuts.get(model, model)  # Translate shorthand to full model name
-        self.max_tokens = max_tokens
+    model: str
+    max_tokens: int = 4096
+    conversation_history: List[Message] = field(default_factory=list)
+
+    def __post_init__(self):
+        self.model = model_shortcuts.get(self.model, self.model)
         self.conversation_history = self.load_conversation_history()
 
-    def add_message(self, role, content):
-        message = {
-            "id": str(uuid.uuid4()),
-            "role": role,
-            "content": content,
-            "timestamp": datetime.utcnow().isoformat() + 'Z',
-        }
-        # Update in-memory history
+    def add_message(self, role: str, content: str):
+        message = Message(
+            id=str(uuid.uuid4()),
+            role=role,
+            content=content,
+            timestamp=datetime.utcnow().isoformat() + 'Z',
+        )
         self.conversation_history.append(message)
-        # Append to the persistent history file
         with open(history_file, 'w') as f:
-            json.dump(self.conversation_history, f, indent=4)
+            json.dump([asdict(msg) for msg in self.conversation_history], f, indent=4)  # Corrected usage of asdict
 
-    def submit(self, user_message):
+    def _prepare_messages_for_model(self) -> List[Message]:
+        formatted_content = ""
+        for msg in self.conversation_history:
+            prefix = f"{msg.role}: "
+            formatted_content += prefix + msg.content + "\n\n"
+
+        return [Message(id=str(uuid.uuid4()), role="user", content=formatted_content.strip(), timestamp=datetime.utcnow().isoformat() + 'Z')]
+
+    def submit(self, user_message: str):
         self.add_message("user", user_message)
         messages_to_send = self._prepare_messages_for_model()
         
         try:
-            response = litellm.completion(
-                model=self.model,
-                messages=messages_to_send,
-            )
-            # Assuming the response structure, adjust as needed
+            response = litellm.completion(model=self.model, messages=[asdict(msg) for msg in messages_to_send])
             self.add_message("assistant", response.choices[0].message.content)
-            print(messages_to_send)
-            print("---")
             print(response.choices[0].message.content)
-            print(response.usage.total_tokens)
-            print(response.model)
+            # print(response.usage.total_tokens)
+            # print(response.model)
         except Exception as e:
             logger.exception("Error during LiteLLM completion")
             raise e
 
-    def _prepare_messages_for_model(self):
-        """
-        Formats the conversation history into a single string that alternates between user and assistant messages.
-        This makes the conversation more comprehensible and useful for future interactions.
-        """
-        formatted_content = ""
-        for msg in self.conversation_history:
-            # Add user or assistant prefix based on the role
-            prefix = f"{msg['role']}: "
-            formatted_content += prefix + msg["content"] + "\n\n"
-
-        # Check if the formatted content exceeds max tokens, and trim if necessary
-        tokens = formatted_content.split()
-        if len(tokens) > self.max_tokens:
-            # If exceeds, trim tokens from the start
-            trimmed_content = " ".join(tokens[-self.max_tokens:])
-            formatted_content = trimmed_content
-
-        # Wrap the formatted content in a list to match expected input format
-        messages_to_send = [{
-            "id": str(uuid.uuid4()),
-            "role": "user",  # Assuming the whole conversation is treated as 'user' input
-            "content": formatted_content.strip(),
-            "timestamp": datetime.utcnow().isoformat() + 'Z',
-        }]
-
-        return messages_to_send
-
-
-
-    def load_conversation_history(self):
+    def load_conversation_history(self) -> List[Message]:
         try:
             with open(history_file, 'r') as f:
-                return json.load(f)
+                return [Message(**msg) for msg in json.load(f)]
         except FileNotFoundError:
             return []
 
-def chat(model, content):
+def chat(model: str, content: str):
     conv = LiteLLMConversation(model=model)
     conv.submit(content)
 

@@ -34,5 +34,41 @@
         "role": "assistant",
         "content": "Okay, let's add 11 to 529.\n\n529 + 11 = 540\n\nSo the final result is 540.",
         "timestamp": "2024-03-15T17:01:43.172057Z"
+    },
+    {
+        "id": "df49d703-624c-4528-9491-60a95c987896",
+        "role": "user",
+        "content": "yo whats up",
+        "timestamp": "2024-03-15T17:09:39.772242Z"
+    },
+    {
+        "id": "4bacf91d-d04f-4f40-bea1-3a7b485d23c0",
+        "role": "assistant",
+        "content": "Not much, just here ready to help out however I can! Did you have any other questions or topics you'd like to discuss?",
+        "timestamp": "2024-03-15T17:09:50.857351Z"
+    },
+    {
+        "id": "ccfc1a6f-e1ef-44e7-bafe-024e50d2e94a",
+        "role": "user",
+        "content": "do you remember the last number you gave me ?",
+        "timestamp": "2024-03-15T17:10:16.743269Z"
+    },
+    {
+        "id": "1c23dea8-6ab0-4ae3-9dc3-9ade36a9fd7f",
+        "role": "assistant",
+        "content": "Yes, I remember the last number I gave you was 540. That was the result of calculating 23 * 23 and then adding 11 to it.",
+        "timestamp": "2024-03-15T17:10:22.003860Z"
+    },
+    {
+        "id": "72d31007-138c-42fe-b64b-d9dd75b2e655",
+        "role": "user",
+        "content": "great can you add 59 to that ?",
+        "timestamp": "2024-03-15T17:11:49.307400Z"
+    },
+    {
+        "id": "5e5a3efb-dd9b-462e-9344-d5d30fbce898",
+        "role": "assistant",
+        "content": "Okay, let's add 59 to the previous result of 540.\n\n540 + 59 = 599\n\nSo the new result is 599.",
+        "timestamp": "2024-03-15T17:11:50.628150Z"
     }
 ]
