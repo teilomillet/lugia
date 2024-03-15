@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "lugia"
+version = "0.1.0"
+description = ""
+authors = ["Teïlo <teilomillet@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+airtable = "^0.4.8"
+fire = "^0.6.0"
+orjson = "^3.9.15"
+httpx = "^0.27.0"
+loguru = "^0.7.2"
+
+[tool.poetry.group.dev.dependencies]
+litellm = "^1.31.13"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
