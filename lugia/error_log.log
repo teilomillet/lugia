@@ -1,0 +1,133 @@
+2024-03-15 11:58:12.811 | ERROR    | __main__:submit_message:36 - An error occurred during LiteLLM completion request
+Traceback (most recent call last):
+
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/litellm/llms/openai.py", line 361, in completion
+    raise e
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/litellm/llms/openai.py", line 283, in completion
+    return self.streaming(
+           │    └ <function OpenAIChatCompletion.streaming at 0x7f995d758dc0>
+           └ <litellm.llms.openai.OpenAIChatCompletion object at 0x7f995d775c00>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/litellm/llms/openai.py", line 461, in streaming
+    response = openai_client.chat.completions.create(**data, timeout=timeout)
+               │             │    │           │        │             └ 600.0
+               │             │    │           │        └ {'model': 'gpt-3.5-turbo', 'messages': [{'role': 'user', 'content': "Hey, how's it going?"}], 'stream': True, 'extra_body': {}}
+               │             │    │           └ <function Completions.create at 0x7f995ebd3a30>
+               │             │    └ <openai.resources.chat.completions.Completions object at 0x7f995d6d8d00>
+               │             └ <openai.resources.chat.chat.Chat object at 0x7f995d6927d0>
+               └ <openai.OpenAI object at 0x7f995d692b00>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/openai/_utils/_utils.py", line 275, in wrapper
+    return func(*args, **kwargs)
+           │     │       └ {'model': 'gpt-3.5-turbo', 'messages': [{'role': 'user', 'content': "Hey, how's it going?"}], 'stream': True, 'extra_body': {...
+           │     └ (<openai.resources.chat.completions.Completions object at 0x7f995d6d8d00>,)
+           └ <function Completions.create at 0x7f995ebd3ac0>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/openai/resources/chat/completions.py", line 663, in create
+    return self._post(
+           │    └ <bound method SyncAPIClient.post of <openai.OpenAI object at 0x7f995d692b00>>
+           └ <openai.resources.chat.completions.Completions object at 0x7f995d6d8d00>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/openai/_base_client.py", line 1200, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+           │    │          │    │       │        │            │                  └ openai.Stream[openai.types.chat.chat_completion_chunk.ChatCompletionChunk]
+           │    │          │    │       │        │            └ True
+           │    │          │    │       │        └ FinalRequestOptions(method='post', url='/chat/completions', params={}, headers=NOT_GIVEN, max_retries=NOT_GIVEN, timeout=600....
+           │    │          │    │       └ <class 'openai.types.chat.chat_completion.ChatCompletion'>
+           │    │          │    └ <function SyncAPIClient.request at 0x7f995ecdc4c0>
+           │    │          └ <openai.OpenAI object at 0x7f995d692b00>
+           │    └ ~ResponseT
+           └ <function cast at 0x7f9961372cb0>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/openai/_base_client.py", line 889, in request
+    return self._request(
+           │    └ <function SyncAPIClient._request at 0x7f995ecdc550>
+           └ <openai.OpenAI object at 0x7f995d692b00>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/openai/_base_client.py", line 965, in _request
+    return self._retry_request(
+           │    └ <function SyncAPIClient._retry_request at 0x7f995ecdc5e0>
+           └ <openai.OpenAI object at 0x7f995d692b00>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/openai/_base_client.py", line 1013, in _retry_request
+    return self._request(
+           │    └ <function SyncAPIClient._request at 0x7f995ecdc550>
+           └ <openai.OpenAI object at 0x7f995d692b00>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/openai/_base_client.py", line 965, in _request
+    return self._retry_request(
+           │    └ <function SyncAPIClient._retry_request at 0x7f995ecdc5e0>
+           └ <openai.OpenAI object at 0x7f995d692b00>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/openai/_base_client.py", line 1013, in _retry_request
+    return self._request(
+           │    └ <function SyncAPIClient._request at 0x7f995ecdc550>
+           └ <openai.OpenAI object at 0x7f995d692b00>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/openai/_base_client.py", line 980, in _request
+    raise self._make_status_error_from_response(err.response) from None
+          │    └ <function BaseClient._make_status_error_from_response at 0x7f995ed832e0>
+          └ <openai.OpenAI object at 0x7f995d692b00>
+
+openai.RateLimitError: Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+
+During handling of the above exception, another exception occurred:
+
+
+Traceback (most recent call last):
+
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/litellm/main.py", line 873, in completion
+    raise e
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/litellm/main.py", line 847, in completion
+    response = openai_chat_completions.completion(
+               │                       └ <function OpenAIChatCompletion.completion at 0x7f995d758b80>
+               └ <litellm.llms.openai.OpenAIChatCompletion object at 0x7f995d775c00>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/litellm/llms/openai.py", line 367, in completion
+    raise OpenAIError(status_code=e.status_code, message=str(e))
+          └ <class 'litellm.llms.openai.OpenAIError'>
+
+litellm.llms.openai.OpenAIError: Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+
+During handling of the above exception, another exception occurred:
+
+
+Traceback (most recent call last):
+
+  File "/home/teilo/Code/lugia/lugia/infra.py", line 41, in <module>
+    fire.Fire(submit_message)
+    │    │    └ <function submit_message at 0x7f995d2bd510>
+    │    └ <function Fire at 0x7f995d2beb90>
+    └ <module 'fire' from '/home/teilo/.miniforge3/lib/python3.10/site-packages/fire/__init__.py'>
+
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/fire/core.py", line 143, in Fire
+    component_trace = _Fire(component, args, parsed_flag_args, context, name)
+                      │     │          │     │                 │        └ 'infra.py'
+                      │     │          │     │                 └ {}
+                      │     │          │     └ Namespace(verbose=False, interactive=False, separator='-', completion=None, help=False, trace=False)
+                      │     │          └ ['--model', 'gpt-3.5-turbo', '--content', "Hey, how's it going?"]
+                      │     └ <function submit_message at 0x7f995d2bd510>
+                      └ <function _Fire at 0x7f995d6ac040>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/fire/core.py", line 477, in _Fire
+    component, remaining_args = _CallAndUpdateTrace(
+    │                           └ <function _CallAndUpdateTrace at 0x7f995d6ac160>
+    └ <function submit_message at 0x7f995d2bd510>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/fire/core.py", line 693, in _CallAndUpdateTrace
+    component = fn(*varargs, **kwargs)
+                │   │          └ {}
+                │   └ ['gpt-3.5-turbo', "Hey, how's it going?", True]
+                └ <function submit_message at 0x7f995d2bd510>
+
+> File "/home/teilo/Code/lugia/lugia/infra.py", line 29, in submit_message
+    response = litellm.completion(
+               │       └ <function completion at 0x7f995d34c700>
+               └ <module 'litellm' from '/home/teilo/.miniforge3/lib/python3.10/site-packages/litellm/__init__.py'>
+
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/litellm/utils.py", line 2481, in wrapper
+    raise e
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/litellm/utils.py", line 2384, in wrapper
+    result = original_function(*args, **kwargs)
+             │                  │       └ {'model': 'gpt-3.5-turbo', 'messages': [{'role': 'user', 'content': "Hey, how's it going?"}], 'stream': True, 'litellm_call_i...
+             │                  └ ()
+             └ <function completion at 0x7f995d34c4c0>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/litellm/main.py", line 1897, in completion
+    raise exception_type(
+          └ <function exception_type at 0x7f995cec7a30>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/litellm/utils.py", line 7520, in exception_type
+    raise e
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/litellm/utils.py", line 6404, in exception_type
+    raise RateLimitError(
+          └ <class 'litellm.exceptions.RateLimitError'>
+
+litellm.exceptions.RateLimitError: OpenAIException - Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
