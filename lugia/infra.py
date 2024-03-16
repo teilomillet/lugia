@@ -39,7 +39,7 @@ class Message:
 @dataclass
 class LiteLLMConversation:
     model: str
-    max_tokens: int = 4096
+    max_tokens: int = 40962
     conversation_history: List[Message] = field(default_factory=list)
 
     def __post_init__(self):
