@@ -38,10 +38,10 @@ function displayMessage(text, sender) {
 
     segments.forEach((segment, index) => {
         if (index % 2 === 0) { // Even indices are treated as plain text
-            // Adding plain text directly or wrapped in <p> tags
-            if (segment.trim().length > 0) { // Ensure segment is not just empty or whitespace
-                const textElement = document.createElement('p');
-                textElement.textContent = segment;
+            if (segment.trim().length > 0) {
+                const textElement = document.createElement('div'); // Use 'div' for block-level container
+                // Replace line breaks with <br> tags for visual representation
+                textElement.innerHTML = segment.replace(/\n/g, '<br>');
                 messageElement.appendChild(textElement);
             }
         } else { // Odd indices are code blocks
@@ -60,4 +60,26 @@ function displayMessage(text, sender) {
     chatBox.appendChild(messageElement);
     chatBox.scrollTop = chatBox.scrollHeight; // Auto-scroll to the latest message
 }
+// New code for dynamically adjusting the textarea height
+document.addEventListener('input', function(event) {
+    if (event.target.id === 'user-input') {
+        event.target.style.height = 'auto'; // Reset height to recalculate
+        event.target.style.height = event.target.scrollHeight + 'px';
+    }
+}, false);
 
+// Night mode switcher
+document.addEventListener('DOMContentLoaded', function() {
+    const themeSwitcher = document.getElementById('theme-switcher');
+
+    themeSwitcher.addEventListener('click', () => {
+        document.body.classList.toggle('night-mode');
+        
+        // Update the button text based on the current theme
+        if (document.body.classList.contains('night-mode')) {
+            themeSwitcher.textContent = 'Switch to Day Mode';
+        } else {
+            themeSwitcher.textContent = 'Switch to Night Mode';
+        }
+    });
+});
