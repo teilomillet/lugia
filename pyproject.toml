@@ -15,6 +15,8 @@ loguru = "^0.7.2"
 python-dotenv = "^1.0.1"
 openai = "^1.14.0"
 litellm = "^1.31.13"
+fastapi = "^0.110.0"
+uvicorn = "^0.28.0"
 
 [tool.poetry.group.dev.dependencies]
 litellm = "^1.31.13"

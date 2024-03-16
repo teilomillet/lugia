@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github.min.css">
+</head>
+<body>
+    <div id="chat-container">
+        <div id="model-selector">
+            <label for="model-dropdown">Choose a model:</label>
+            <select id="model-dropdown">
+                <option value="claude-3-haiku">Claude-3 Haiku</option>
+                <option value="claude-3-opus">Claude-3 Opus</option>
+                <option value="claude-3-sonnet">Claude-3 Sonnet</option>
+                <option value="claude-2">Claude-2</option>
+                <option value="gpt-4">GPT-4</option>
+                <option value="gpt-3.5">GPT-3.5</option>
+            </select>
+        </div>
+        <div id="chat-box"></div>
+        <div id="input-container">
+            <textarea id="user-input" placeholder="Type your message..." rows="2"></textarea>
+            <button id="send-btn">Send</button>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
