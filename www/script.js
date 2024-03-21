@@ -4,7 +4,9 @@ const sendBtn = document.getElementById('send-btn');
 const modelDropdown = document.getElementById('model-dropdown');
 
 // AddEventListener to the send button
-sendBtn.addEventListener('click', () => {
+sendBtn.addEventListener('click', sendMessage);
+
+async function sendMessage() {
     const userText = userInput.value;
     const selectedModel = modelDropdown.value;
     if (!userText.trim()) return;
@@ -12,22 +14,20 @@ sendBtn.addEventListener('click', () => {
     displayMessage(userText, 'user');
     userInput.value = '';
 
-    // Fetch request to your API endpoint
-    fetch('http://127.0.0.1:8000/chat/', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ model: selectedModel, content: userText }),
-    })
-    .then(response => response.json())
-    .then(data => {
+    try {
+        const response = await fetch('http://127.0.0.1:8000/chat/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ model: selectedModel, content: userText }),
+        });
+        const data = await response.json();
         displayMessage(data.response, 'bot');
-    })
-    .catch(error => {
+    } catch (error) {
         console.error('Error:', error);
-    });
-});
+    }
+}
 
 function displayMessage(text, sender) {
     const messageElement = document.createElement('div');
@@ -83,3 +83,60 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+
+// New functions for conversation management
+async function listConversations() {
+    const response = await fetch('http://127.0.0.1:8000/conversations/');
+    const data = await response.json();
+    return data.conversations;
+}
+
+async function createNewConversation() {
+    await fetch('http://127.0.0.1:8000/conversations/new/', { method: 'POST' });
+    await loadConversations();
+}
+
+async function switchConversation(conversationFile) {
+    await fetch(`http://127.0.0.1:8000/conversations/switch/?conversation_file=${conversationFile}`, { method: 'POST' });
+    clearChatBox();
+    await loadChat();
+}
+
+async function loadConversations() {
+    const conversations = await listConversations();
+    const conversationList = document.getElementById('conversation-list');
+    conversationList.innerHTML = '';
+
+    conversations.forEach(conversation => {
+        const listItem = document.createElement('li');
+        listItem.textContent = conversation;
+        listItem.addEventListener('click', () => switchConversation(conversation));
+        conversationList.appendChild(listItem);
+    });
+}
+
+function clearChatBox() {
+    chatBox.innerHTML = '';
+}
+
+async function loadChat() {
+    try {
+        const response = await fetch('http://127.0.0.1:8000/conversations/history/');
+        const data = await response.json();
+        const messages = data.messages;
+
+        clearChatBox();
+
+        messages.forEach(message => {
+            const sender = message.role === 'user' ? 'user' : 'bot';
+            displayMessage(message.content, sender);
+        });
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
+
+document.getElementById('new-conversation-btn').addEventListener('click', createNewConversation);
+
+// Load conversations when the page loads
+loadConversations();

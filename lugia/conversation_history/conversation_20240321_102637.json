@@ -1,0 +1,26 @@
+[
+    {
+        "id": "5357f0c4-6686-41db-9be5-6bb99c17e5e5",
+        "role": "user",
+        "content": "good",
+        "timestamp": "2024-03-21T09:26:44.482150Z"
+    },
+    {
+        "id": "f20579cf-8385-4b39-87c2-1fb5f613fbed",
+        "role": "assistant",
+        "content": "Sounds good! I'm happy to have a friendly conversation with you.",
+        "timestamp": "2024-03-21T09:26:45.274814Z"
+    },
+    {
+        "id": "7a5aae2b-e346-4c43-baca-bfa38d18e2e3",
+        "role": "user",
+        "content": "whats up\n",
+        "timestamp": "2024-03-21T09:26:56.914774Z"
+    },
+    {
+        "id": "96435711-242a-494e-95b6-aeb57853154b",
+        "role": "assistant",
+        "content": "Great, I'm ready for a friendly chat! How's your day going so far? Anything interesting happening or on your mind you'd like to discuss?",
+        "timestamp": "2024-03-21T09:26:57.808074Z"
+    }
+]

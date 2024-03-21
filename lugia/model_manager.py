@@ -27,7 +27,7 @@ class ModelManager:
         model_name = self.get_model_name(model)
         try:
             formatted_messages = [{"role": msg["role"], "content": msg["content"]} for msg in messages]
-            response = await litellm.acompletion(model=model_name, messages=formatted_messages, max_tokens=2048)
+            response = await litellm.acompletion(model=model_name, messages=formatted_messages, max_tokens=4096)
             print("Response:", response)  # Print response for debugging
             return response.choices[0].message.content  # Assuming response structure
         except Exception as e:

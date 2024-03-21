@@ -4,8 +4,9 @@ import os
 
 load_dotenv()
 
+
 class Config:
     OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
     ANTHROPIC_API_KEY = os.getenv('ANTHROPIC_API_KEY')
-    HISTORY_FILE = "conversation_history.json"
+    HISTORY_DIR = "conversation_history"  # Directory to store conversation files
     LOG_FILE = "liteLLM_log.log"
