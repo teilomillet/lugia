@@ -11,3 +11,4 @@ class Config:
     HISTORY_DIR = "conversation_history"  # Directory to store conversation files
     LOG_FILE = "liteLLM_log.log"
     TOKEN_LIMIT = 8182
+    CACHE_SIZE = 1000
