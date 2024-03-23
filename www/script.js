@@ -36,16 +36,16 @@ function displayMessage(text, sender) {
     // Splitting the text by triple backticks to separate plain text and code blocks
     const segments = text.split('```');
 
-segments.forEach((segment, index) => {
-if (index % 2 === 0) { // Even indices are treated as plain text
-if (segment.trim().length > 0) {
-    const textElement = document.createElement('div'); // Use 'div' for block-level container
-    // Replace line breaks with tags for visual representation
-            textElement.innerHTML = segment.replace(/\n/g, '');
-            messageElement.appendChild(textElement);
+    segments.forEach((segment, index) => {
+        if (index % 2 === 0) { // Even indices are treated as plain text
+            if (segment.trim().length > 0) {
+                const textElement = document.createElement('div'); // Use 'div' for block-level container
+                // Replace line breaks with <br> tags for visual representation
+                textElement.innerHTML = segment.replace(/\n/g, '<br>');
+                messageElement.appendChild(textElement);
             }
-            } else { // Odd indices are code blocks
-            // Wrapping code in tags for formatting
+        } else { // Odd indices are code blocks
+            // Wrapping code in <pre> and <code> tags for formatting
             const preElement = document.createElement('pre');
             const codeElement = document.createElement('code');
             codeElement.textContent = segment;
@@ -226,3 +226,4 @@ document.getElementById('new-conversation-btn').addEventListener('click', create
 
 // Load conversations when the page loads
 loadConversations();
+
