@@ -37,6 +37,10 @@ class ConversationService:
         conversation_files = sorted(self.history_dir.glob("*.json"), reverse=True)
         return conversation_files[0] if conversation_files else None
 
+    async def list_conversations(self) -> List[Path]:
+        conversation_files = sorted(self.history_dir.glob("*.json"), reverse=True)
+        return conversation_files
+
     async def load_conversation_history(self, conversation_file: Path) -> List[Message]:
         try:
             async with aiofiles.open(conversation_file, 'r') as f:
