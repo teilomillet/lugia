@@ -1,0 +1,1425 @@
+2024-03-26 16:02:27.532 | ERROR    | core.model:generate_response:34 - Error during model response generation
+Traceback (most recent call last):
+
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/litellm/main.py", line 1164, in completion
+    response = anthropic.completion(
+               │         └ <function completion at 0x7f6bd9517eb0>
+               └ <module 'litellm.llms.anthropic' from '/home/teilo/.miniforge3/lib/python3.10/site-packages/litellm/llms/anthropic.py'>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/litellm/llms/anthropic.py", line 119, in completion
+    headers = validate_environment(api_key, headers)
+              │                    │        └ None
+              │                    └ None
+              └ <function validate_environment at 0x7f6bd95176d0>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/litellm/llms/anthropic.py", line 90, in validate_environment
+    raise ValueError(
+
+ValueError: Missing Anthropic API Key - A call is being made to anthropic but no key is set either in the environment variables or via params
+
+
+During handling of the above exception, another exception occurred:
+
+
+Traceback (most recent call last):
+
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/litellm/main.py", line 319, in acompletion
+    response = await loop.run_in_executor(None, func_with_context)  # type: ignore
+                     │    │                     └ functools.partial(<built-in method run of _contextvars.Context object at 0x7f6bd95f2c00>, functools.partial(<function complet...
+                     │    └ <method 'run_in_executor' of 'uvloop.loop.Loop' objects>
+                     └ <uvloop.Loop running=True closed=False debug=False>
+  File "/home/teilo/.miniforge3/lib/python3.10/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+             │        │            └ None
+             │        └ None
+             └ None
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/litellm/utils.py", line 2770, in wrapper
+    raise e
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/litellm/utils.py", line 2667, in wrapper
+    result = original_function(*args, **kwargs)
+             │                  │       └ {'model': 'claude-3-haiku-20240307', 'messages': [{'role': 'user', 'content': "Here's are the previous part of a friendly con...
+             │                  └ ()
+             └ <function completion at 0x7f6bd9623d00>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/litellm/main.py", line 2094, in completion
+    raise exception_type(
+          └ <function exception_type at 0x7f6bd935ec20>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/litellm/utils.py", line 8257, in exception_type
+    raise e
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/litellm/utils.py", line 8232, in exception_type
+    raise APIConnectionError(
+          └ <class 'litellm.exceptions.APIConnectionError'>
+
+litellm.exceptions.APIConnectionError: Missing Anthropic API Key - A call is being made to anthropic but no key is set either in the environment variables or via params
+
+
+During handling of the above exception, another exception occurred:
+
+
+Traceback (most recent call last):
+
+  File "<string>", line 1, in <module>
+  File "/home/teilo/.miniforge3/lib/python3.10/multiprocessing/spawn.py", line 116, in spawn_main
+    exitcode = _main(fd, parent_sentinel)
+               │     │   └ 5
+               │     └ 8
+               └ <function _main at 0x7f6bddfaf400>
+  File "/home/teilo/.miniforge3/lib/python3.10/multiprocessing/spawn.py", line 129, in _main
+    return self._bootstrap(parent_sentinel)
+           │    │          └ 5
+           │    └ <function BaseProcess._bootstrap at 0x7f6bde135d80>
+           └ <SpawnProcess name='SpawnProcess-1' parent=18899 started>
+  File "/home/teilo/.miniforge3/lib/python3.10/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+    │    └ <function BaseProcess.run at 0x7f6bde1353f0>
+    └ <SpawnProcess name='SpawnProcess-1' parent=18899 started>
+  File "/home/teilo/.miniforge3/lib/python3.10/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+    │    │        │    │        │    └ {'config': <uvicorn.config.Config object at 0x7f6bddfc7190>, 'target': <bound method Server.run of <uvicorn.server.Server obj...
+    │    │        │    │        └ <SpawnProcess name='SpawnProcess-1' parent=18899 started>
+    │    │        │    └ ()
+    │    │        └ <SpawnProcess name='SpawnProcess-1' parent=18899 started>
+    │    └ <function subprocess_started at 0x7f6bdd5c35b0>
+    └ <SpawnProcess name='SpawnProcess-1' parent=18899 started>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/uvicorn/_subprocess.py", line 78, in subprocess_started
+    target(sockets=sockets)
+    │              └ [<socket.socket fd=4, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8000)>]
+    └ <bound method Server.run of <uvicorn.server.Server object at 0x7f6bddfc71f0>>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/uvicorn/server.py", line 62, in run
+    return asyncio.run(self.serve(sockets=sockets))
+           │       │   │    │             └ [<socket.socket fd=4, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8000)>]
+           │       │   │    └ <function Server.serve at 0x7f6bdd5c2680>
+           │       │   └ <uvicorn.server.Server object at 0x7f6bddfc71f0>
+           │       └ <function run at 0x7f6bdd77b1c0>
+           └ <module 'asyncio' from '/home/teilo/.miniforge3/lib/python3.10/asyncio/__init__.py'>
+  File "/home/teilo/.miniforge3/lib/python3.10/asyncio/runners.py", line 44, in run
+    return loop.run_until_complete(main)
+           │    │                  └ <coroutine object Server.serve at 0x7f6bdd28dd20>
+           │    └ <method 'run_until_complete' of 'uvloop.loop.Loop' objects>
+           └ <uvloop.Loop running=True closed=False debug=False>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/uvicorn/protocols/http/httptools_impl.py", line 412, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+                   └ <uvicorn.middleware.proxy_headers.ProxyHeadersMiddleware object at 0x7f6bdd2a2c80>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/uvicorn/middleware/proxy_headers.py", line 69, in __call__
+    return await self.app(scope, receive, send)
+                 │    │   │      │        └ <bound method RequestResponseCycle.send of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7f6bd96492...
+                 │    │   │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7f6bd96...
+                 │    │   └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.4'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+                 │    └ <fastapi.applications.FastAPI object at 0x7f6bd94b5420>
+                 └ <uvicorn.middleware.proxy_headers.ProxyHeadersMiddleware object at 0x7f6bdd2a2c80>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+                           │      │        └ <bound method RequestResponseCycle.send of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7f6bd96492...
+                           │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7f6bd96...
+                           └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.4'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/starlette/applications.py", line 123, in __call__
+    await self.middleware_stack(scope, receive, send)
+          │    │                │      │        └ <bound method RequestResponseCycle.send of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7f6bd96492...
+          │    │                │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7f6bd96...
+          │    │                └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.4'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          │    └ <starlette.middleware.errors.ServerErrorMiddleware object at 0x7f6bd94b56f0>
+          └ <fastapi.applications.FastAPI object at 0x7f6bd94b5420>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/starlette/middleware/errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+          │    │   │      │        └ <function ServerErrorMiddleware.__call__.<locals>._send at 0x7f6bd960f910>
+          │    │   │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7f6bd96...
+          │    │   └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.4'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          │    └ <starlette.middleware.cors.CORSMiddleware object at 0x7f6bd94b58d0>
+          └ <starlette.middleware.errors.ServerErrorMiddleware object at 0x7f6bd94b56f0>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/starlette/middleware/cors.py", line 91, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+          │    │               │      │        │                     └ Headers({'host': '127.0.0.1:8000', 'connection': 'keep-alive', 'content-length': '41', 'sec-ch-ua': '"Brave";v="123", "Not:A-...
+          │    │               │      │        └ <function ServerErrorMiddleware.__call__.<locals>._send at 0x7f6bd960f910>
+          │    │               │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7f6bd96...
+          │    │               └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.4'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          │    └ <function CORSMiddleware.simple_response at 0x7f6bd958dd80>
+          └ <starlette.middleware.cors.CORSMiddleware object at 0x7f6bd94b58d0>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/starlette/middleware/cors.py", line 146, in simple_response
+    await self.app(scope, receive, send)
+          │    │   │      │        └ functools.partial(<bound method CORSMiddleware.send of <starlette.middleware.cors.CORSMiddleware object at 0x7f6bd94b58d0>>, ...
+          │    │   │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7f6bd96...
+          │    │   └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.4'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          │    └ <starlette.middleware.exceptions.ExceptionMiddleware object at 0x7f6bd94b56c0>
+          └ <starlette.middleware.cors.CORSMiddleware object at 0x7f6bd94b58d0>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/starlette/middleware/exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+          │                            │    │    │     │      │        └ functools.partial(<bound method CORSMiddleware.send of <starlette.middleware.cors.CORSMiddleware object at 0x7f6bd94b58d0>>, ...
+          │                            │    │    │     │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7f6bd96...
+          │                            │    │    │     └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.4'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          │                            │    │    └ <starlette.requests.Request object at 0x7f6bd9649fc0>
+          │                            │    └ <fastapi.routing.APIRouter object at 0x7f6bd94b5210>
+          │                            └ <starlette.middleware.exceptions.ExceptionMiddleware object at 0x7f6bd94b56c0>
+          └ <function wrap_app_handling_exceptions at 0x7f6bdc073b50>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    await app(scope, receive, sender)
+          │   │      │        └ <function wrap_app_handling_exceptions.<locals>.wrapped_app.<locals>.sender at 0x7f6bd960fac0>
+          │   │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7f6bd96...
+          │   └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.4'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          └ <fastapi.routing.APIRouter object at 0x7f6bd94b5210>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/starlette/routing.py", line 758, in __call__
+    await self.middleware_stack(scope, receive, send)
+          │    │                │      │        └ <function wrap_app_handling_exceptions.<locals>.wrapped_app.<locals>.sender at 0x7f6bd960fac0>
+          │    │                │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7f6bd96...
+          │    │                └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.4'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          │    └ <bound method Router.app of <fastapi.routing.APIRouter object at 0x7f6bd94b5210>>
+          └ <fastapi.routing.APIRouter object at 0x7f6bd94b5210>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/starlette/routing.py", line 778, in app
+    await route.handle(scope, receive, send)
+          │     │      │      │        └ <function wrap_app_handling_exceptions.<locals>.wrapped_app.<locals>.sender at 0x7f6bd960fac0>
+          │     │      │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7f6bd96...
+          │     │      └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.4'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          │     └ <function Route.handle at 0x7f6bdc005000>
+          └ APIRoute(path='/chat/', name='chat', methods=['POST'])
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/starlette/routing.py", line 299, in handle
+    await self.app(scope, receive, send)
+          │    │   │      │        └ <function wrap_app_handling_exceptions.<locals>.wrapped_app.<locals>.sender at 0x7f6bd960fac0>
+          │    │   │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7f6bd96...
+          │    │   └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.4'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          │    └ <function request_response.<locals>.app at 0x7f6bd958e4d0>
+          └ APIRoute(path='/chat/', name='chat', methods=['POST'])
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/starlette/routing.py", line 79, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+          │                            │    │        │      │        └ <function wrap_app_handling_exceptions.<locals>.wrapped_app.<locals>.sender at 0x7f6bd960fac0>
+          │                            │    │        │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7f6bd96...
+          │                            │    │        └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.4'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          │                            │    └ <starlette.requests.Request object at 0x7f6bd9648310>
+          │                            └ <function request_response.<locals>.app.<locals>.app at 0x7f6bd960fe20>
+          └ <function wrap_app_handling_exceptions at 0x7f6bdc073b50>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    await app(scope, receive, sender)
+          │   │      │        └ <function wrap_app_handling_exceptions.<locals>.wrapped_app.<locals>.sender at 0x7f6bd960fd00>
+          │   │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7f6bd96...
+          │   └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.4'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          └ <function request_response.<locals>.app.<locals>.app at 0x7f6bd960fe20>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/starlette/routing.py", line 74, in app
+    response = await func(request)
+                     │    └ <starlette.requests.Request object at 0x7f6bd9648310>
+                     └ <function get_request_handler.<locals>.app at 0x7f6bd958e440>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/fastapi/routing.py", line 278, in app
+    raw_response = await run_endpoint_function(
+                         └ <function run_endpoint_function at 0x7f6bdc005ea0>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/fastapi/routing.py", line 191, in run_endpoint_function
+    return await dependant.call(**values)
+                 │         │      └ {'request': ChatRequest(model='claude-3-haiku', content='yo')}
+                 │         └ <function chat at 0x7f6bd960f7f0>
+                 └ <fastapi.dependencies.models.Dependant object at 0x7f6bd94b4190>
+
+  File "/home/teilo/Code/lugia/api/main.py", line 41, in chat
+    response = await model_manager.generate_response(request.model, [asdict(msg) for msg in formatted_messages])
+                     │             │                 │       │       │                      └ [Message(id='d76e0144-4ade-4100-98c3-9df1a53b63ba', role='user', content="Here's are the previous part of a friendly conversa...
+                     │             │                 │       │       └ <function asdict at 0x7f6bdd39bc70>
+                     │             │                 │       └ 'claude-3-haiku'
+                     │             │                 └ ChatRequest(model='claude-3-haiku', content='yo')
+                     │             └ <function ModelManager.generate_response at 0x7f6bd958d870>
+                     └ <core.model.ModelManager object at 0x7f6bd94b6d70>
+
+> File "/home/teilo/Code/lugia/core/model.py", line 30, in generate_response
+    response = await litellm.acompletion(model=model_name, messages=formatted_messages, max_tokens=4096)
+                     │       │                 │                    └ [{'role': 'user', 'content': "Here's are the previous part of a friendly conversation:\n\nuser: yo"}]
+                     │       │                 └ 'claude-3-haiku-20240307'
+                     │       └ <function acompletion at 0x7f6bd9623be0>
+                     └ <module 'litellm' from '/home/teilo/.miniforge3/lib/python3.10/site-packages/litellm/__init__.py'>
+
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/litellm/utils.py", line 3230, in wrapper_async
+    raise e
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/litellm/utils.py", line 3062, in wrapper_async
+    result = await original_function(*args, **kwargs)
+                   │                  │       └ {'model': 'claude-3-haiku-20240307', 'messages': [{'role': 'user', 'content': "Here's are the previous part of a friendly con...
+                   │                  └ ()
+                   └ <function acompletion at 0x7f6bd9620af0>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/litellm/main.py", line 327, in acompletion
+    raise exception_type(
+          └ <function exception_type at 0x7f6bd935ec20>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/litellm/utils.py", line 8257, in exception_type
+    raise e
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/litellm/utils.py", line 7194, in exception_type
+    raise ServiceUnavailableError(
+          └ <class 'litellm.exceptions.ServiceUnavailableError'>
+
+litellm.exceptions.ServiceUnavailableError: AnthropicException - Missing Anthropic API Key - A call is being made to anthropic but no key is set either in the environment variables or via params
+2024-03-26 16:02:27.532 | ERROR    | core.model:generate_response:34 - Error during model response generation
+Traceback (most recent call last):
+
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/litellm/main.py", line 1164, in completion
+    response = anthropic.completion(
+               │         └ <function completion at 0x7f6bd9517eb0>
+               └ <module 'litellm.llms.anthropic' from '/home/teilo/.miniforge3/lib/python3.10/site-packages/litellm/llms/anthropic.py'>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/litellm/llms/anthropic.py", line 119, in completion
+    headers = validate_environment(api_key, headers)
+              │                    │        └ None
+              │                    └ None
+              └ <function validate_environment at 0x7f6bd95176d0>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/litellm/llms/anthropic.py", line 90, in validate_environment
+    raise ValueError(
+
+ValueError: Missing Anthropic API Key - A call is being made to anthropic but no key is set either in the environment variables or via params
+
+
+During handling of the above exception, another exception occurred:
+
+
+Traceback (most recent call last):
+
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/litellm/main.py", line 319, in acompletion
+    response = await loop.run_in_executor(None, func_with_context)  # type: ignore
+                     │    │                     └ functools.partial(<built-in method run of _contextvars.Context object at 0x7f6bd95f2c00>, functools.partial(<function complet...
+                     │    └ <method 'run_in_executor' of 'uvloop.loop.Loop' objects>
+                     └ <uvloop.Loop running=True closed=False debug=False>
+  File "/home/teilo/.miniforge3/lib/python3.10/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+             │        │            └ None
+             │        └ None
+             └ None
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/litellm/utils.py", line 2770, in wrapper
+    raise e
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/litellm/utils.py", line 2667, in wrapper
+    result = original_function(*args, **kwargs)
+             │                  │       └ {'model': 'claude-3-haiku-20240307', 'messages': [{'role': 'user', 'content': "Here's are the previous part of a friendly con...
+             │                  └ ()
+             └ <function completion at 0x7f6bd9623d00>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/litellm/main.py", line 2094, in completion
+    raise exception_type(
+          └ <function exception_type at 0x7f6bd935ec20>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/litellm/utils.py", line 8257, in exception_type
+    raise e
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/litellm/utils.py", line 8232, in exception_type
+    raise APIConnectionError(
+          └ <class 'litellm.exceptions.APIConnectionError'>
+
+litellm.exceptions.APIConnectionError: Missing Anthropic API Key - A call is being made to anthropic but no key is set either in the environment variables or via params
+
+
+During handling of the above exception, another exception occurred:
+
+
+Traceback (most recent call last):
+
+  File "<string>", line 1, in <module>
+  File "/home/teilo/.miniforge3/lib/python3.10/multiprocessing/spawn.py", line 116, in spawn_main
+    exitcode = _main(fd, parent_sentinel)
+               │     │   └ 5
+               │     └ 8
+               └ <function _main at 0x7f6bddfaf400>
+  File "/home/teilo/.miniforge3/lib/python3.10/multiprocessing/spawn.py", line 129, in _main
+    return self._bootstrap(parent_sentinel)
+           │    │          └ 5
+           │    └ <function BaseProcess._bootstrap at 0x7f6bde135d80>
+           └ <SpawnProcess name='SpawnProcess-1' parent=18899 started>
+  File "/home/teilo/.miniforge3/lib/python3.10/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+    │    └ <function BaseProcess.run at 0x7f6bde1353f0>
+    └ <SpawnProcess name='SpawnProcess-1' parent=18899 started>
+  File "/home/teilo/.miniforge3/lib/python3.10/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+    │    │        │    │        │    └ {'config': <uvicorn.config.Config object at 0x7f6bddfc7190>, 'target': <bound method Server.run of <uvicorn.server.Server obj...
+    │    │        │    │        └ <SpawnProcess name='SpawnProcess-1' parent=18899 started>
+    │    │        │    └ ()
+    │    │        └ <SpawnProcess name='SpawnProcess-1' parent=18899 started>
+    │    └ <function subprocess_started at 0x7f6bdd5c35b0>
+    └ <SpawnProcess name='SpawnProcess-1' parent=18899 started>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/uvicorn/_subprocess.py", line 78, in subprocess_started
+    target(sockets=sockets)
+    │              └ [<socket.socket fd=4, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8000)>]
+    └ <bound method Server.run of <uvicorn.server.Server object at 0x7f6bddfc71f0>>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/uvicorn/server.py", line 62, in run
+    return asyncio.run(self.serve(sockets=sockets))
+           │       │   │    │             └ [<socket.socket fd=4, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8000)>]
+           │       │   │    └ <function Server.serve at 0x7f6bdd5c2680>
+           │       │   └ <uvicorn.server.Server object at 0x7f6bddfc71f0>
+           │       └ <function run at 0x7f6bdd77b1c0>
+           └ <module 'asyncio' from '/home/teilo/.miniforge3/lib/python3.10/asyncio/__init__.py'>
+  File "/home/teilo/.miniforge3/lib/python3.10/asyncio/runners.py", line 44, in run
+    return loop.run_until_complete(main)
+           │    │                  └ <coroutine object Server.serve at 0x7f6bdd28dd20>
+           │    └ <method 'run_until_complete' of 'uvloop.loop.Loop' objects>
+           └ <uvloop.Loop running=True closed=False debug=False>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/uvicorn/protocols/http/httptools_impl.py", line 412, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+                   └ <uvicorn.middleware.proxy_headers.ProxyHeadersMiddleware object at 0x7f6bdd2a2c80>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/uvicorn/middleware/proxy_headers.py", line 69, in __call__
+    return await self.app(scope, receive, send)
+                 │    │   │      │        └ <bound method RequestResponseCycle.send of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7f6bd96492...
+                 │    │   │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7f6bd96...
+                 │    │   └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.4'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+                 │    └ <fastapi.applications.FastAPI object at 0x7f6bd94b5420>
+                 └ <uvicorn.middleware.proxy_headers.ProxyHeadersMiddleware object at 0x7f6bdd2a2c80>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+                           │      │        └ <bound method RequestResponseCycle.send of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7f6bd96492...
+                           │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7f6bd96...
+                           └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.4'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/starlette/applications.py", line 123, in __call__
+    await self.middleware_stack(scope, receive, send)
+          │    │                │      │        └ <bound method RequestResponseCycle.send of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7f6bd96492...
+          │    │                │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7f6bd96...
+          │    │                └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.4'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          │    └ <starlette.middleware.errors.ServerErrorMiddleware object at 0x7f6bd94b56f0>
+          └ <fastapi.applications.FastAPI object at 0x7f6bd94b5420>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/starlette/middleware/errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+          │    │   │      │        └ <function ServerErrorMiddleware.__call__.<locals>._send at 0x7f6bd960f910>
+          │    │   │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7f6bd96...
+          │    │   └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.4'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          │    └ <starlette.middleware.cors.CORSMiddleware object at 0x7f6bd94b58d0>
+          └ <starlette.middleware.errors.ServerErrorMiddleware object at 0x7f6bd94b56f0>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/starlette/middleware/cors.py", line 91, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+          │    │               │      │        │                     └ Headers({'host': '127.0.0.1:8000', 'connection': 'keep-alive', 'content-length': '41', 'sec-ch-ua': '"Brave";v="123", "Not:A-...
+          │    │               │      │        └ <function ServerErrorMiddleware.__call__.<locals>._send at 0x7f6bd960f910>
+          │    │               │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7f6bd96...
+          │    │               └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.4'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          │    └ <function CORSMiddleware.simple_response at 0x7f6bd958dd80>
+          └ <starlette.middleware.cors.CORSMiddleware object at 0x7f6bd94b58d0>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/starlette/middleware/cors.py", line 146, in simple_response
+    await self.app(scope, receive, send)
+          │    │   │      │        └ functools.partial(<bound method CORSMiddleware.send of <starlette.middleware.cors.CORSMiddleware object at 0x7f6bd94b58d0>>, ...
+          │    │   │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7f6bd96...
+          │    │   └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.4'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          │    └ <starlette.middleware.exceptions.ExceptionMiddleware object at 0x7f6bd94b56c0>
+          └ <starlette.middleware.cors.CORSMiddleware object at 0x7f6bd94b58d0>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/starlette/middleware/exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+          │                            │    │    │     │      │        └ functools.partial(<bound method CORSMiddleware.send of <starlette.middleware.cors.CORSMiddleware object at 0x7f6bd94b58d0>>, ...
+          │                            │    │    │     │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7f6bd96...
+          │                            │    │    │     └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.4'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          │                            │    │    └ <starlette.requests.Request object at 0x7f6bd9649fc0>
+          │                            │    └ <fastapi.routing.APIRouter object at 0x7f6bd94b5210>
+          │                            └ <starlette.middleware.exceptions.ExceptionMiddleware object at 0x7f6bd94b56c0>
+          └ <function wrap_app_handling_exceptions at 0x7f6bdc073b50>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    await app(scope, receive, sender)
+          │   │      │        └ <function wrap_app_handling_exceptions.<locals>.wrapped_app.<locals>.sender at 0x7f6bd960fac0>
+          │   │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7f6bd96...
+          │   └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.4'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          └ <fastapi.routing.APIRouter object at 0x7f6bd94b5210>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/starlette/routing.py", line 758, in __call__
+    await self.middleware_stack(scope, receive, send)
+          │    │                │      │        └ <function wrap_app_handling_exceptions.<locals>.wrapped_app.<locals>.sender at 0x7f6bd960fac0>
+          │    │                │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7f6bd96...
+          │    │                └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.4'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          │    └ <bound method Router.app of <fastapi.routing.APIRouter object at 0x7f6bd94b5210>>
+          └ <fastapi.routing.APIRouter object at 0x7f6bd94b5210>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/starlette/routing.py", line 778, in app
+    await route.handle(scope, receive, send)
+          │     │      │      │        └ <function wrap_app_handling_exceptions.<locals>.wrapped_app.<locals>.sender at 0x7f6bd960fac0>
+          │     │      │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7f6bd96...
+          │     │      └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.4'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          │     └ <function Route.handle at 0x7f6bdc005000>
+          └ APIRoute(path='/chat/', name='chat', methods=['POST'])
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/starlette/routing.py", line 299, in handle
+    await self.app(scope, receive, send)
+          │    │   │      │        └ <function wrap_app_handling_exceptions.<locals>.wrapped_app.<locals>.sender at 0x7f6bd960fac0>
+          │    │   │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7f6bd96...
+          │    │   └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.4'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          │    └ <function request_response.<locals>.app at 0x7f6bd958e4d0>
+          └ APIRoute(path='/chat/', name='chat', methods=['POST'])
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/starlette/routing.py", line 79, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+          │                            │    │        │      │        └ <function wrap_app_handling_exceptions.<locals>.wrapped_app.<locals>.sender at 0x7f6bd960fac0>
+          │                            │    │        │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7f6bd96...
+          │                            │    │        └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.4'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          │                            │    └ <starlette.requests.Request object at 0x7f6bd9648310>
+          │                            └ <function request_response.<locals>.app.<locals>.app at 0x7f6bd960fe20>
+          └ <function wrap_app_handling_exceptions at 0x7f6bdc073b50>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    await app(scope, receive, sender)
+          │   │      │        └ <function wrap_app_handling_exceptions.<locals>.wrapped_app.<locals>.sender at 0x7f6bd960fd00>
+          │   │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7f6bd96...
+          │   └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.4'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          └ <function request_response.<locals>.app.<locals>.app at 0x7f6bd960fe20>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/starlette/routing.py", line 74, in app
+    response = await func(request)
+                     │    └ <starlette.requests.Request object at 0x7f6bd9648310>
+                     └ <function get_request_handler.<locals>.app at 0x7f6bd958e440>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/fastapi/routing.py", line 278, in app
+    raw_response = await run_endpoint_function(
+                         └ <function run_endpoint_function at 0x7f6bdc005ea0>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/fastapi/routing.py", line 191, in run_endpoint_function
+    return await dependant.call(**values)
+                 │         │      └ {'request': ChatRequest(model='claude-3-haiku', content='yo')}
+                 │         └ <function chat at 0x7f6bd960f7f0>
+                 └ <fastapi.dependencies.models.Dependant object at 0x7f6bd94b4190>
+
+  File "/home/teilo/Code/lugia/api/main.py", line 41, in chat
+    response = await model_manager.generate_response(request.model, [asdict(msg) for msg in formatted_messages])
+                     │             │                 │       │       │                      └ [Message(id='d76e0144-4ade-4100-98c3-9df1a53b63ba', role='user', content="Here's are the previous part of a friendly conversa...
+                     │             │                 │       │       └ <function asdict at 0x7f6bdd39bc70>
+                     │             │                 │       └ 'claude-3-haiku'
+                     │             │                 └ ChatRequest(model='claude-3-haiku', content='yo')
+                     │             └ <function ModelManager.generate_response at 0x7f6bd958d870>
+                     └ <core.model.ModelManager object at 0x7f6bd94b6d70>
+
+> File "/home/teilo/Code/lugia/core/model.py", line 30, in generate_response
+    response = await litellm.acompletion(model=model_name, messages=formatted_messages, max_tokens=4096)
+                     │       │                 │                    └ [{'role': 'user', 'content': "Here's are the previous part of a friendly conversation:\n\nuser: yo"}]
+                     │       │                 └ 'claude-3-haiku-20240307'
+                     │       └ <function acompletion at 0x7f6bd9623be0>
+                     └ <module 'litellm' from '/home/teilo/.miniforge3/lib/python3.10/site-packages/litellm/__init__.py'>
+
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/litellm/utils.py", line 3230, in wrapper_async
+    raise e
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/litellm/utils.py", line 3062, in wrapper_async
+    result = await original_function(*args, **kwargs)
+                   │                  │       └ {'model': 'claude-3-haiku-20240307', 'messages': [{'role': 'user', 'content': "Here's are the previous part of a friendly con...
+                   │                  └ ()
+                   └ <function acompletion at 0x7f6bd9620af0>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/litellm/main.py", line 327, in acompletion
+    raise exception_type(
+          └ <function exception_type at 0x7f6bd935ec20>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/litellm/utils.py", line 8257, in exception_type
+    raise e
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/litellm/utils.py", line 7194, in exception_type
+    raise ServiceUnavailableError(
+          └ <class 'litellm.exceptions.ServiceUnavailableError'>
+
+litellm.exceptions.ServiceUnavailableError: AnthropicException - Missing Anthropic API Key - A call is being made to anthropic but no key is set either in the environment variables or via params
+2024-03-26 16:02:27.532 | ERROR    | core.model:generate_response:34 - Error during model response generation
+Traceback (most recent call last):
+
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/litellm/main.py", line 1164, in completion
+    response = anthropic.completion(
+               │         └ <function completion at 0x7f6bd9517eb0>
+               └ <module 'litellm.llms.anthropic' from '/home/teilo/.miniforge3/lib/python3.10/site-packages/litellm/llms/anthropic.py'>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/litellm/llms/anthropic.py", line 119, in completion
+    headers = validate_environment(api_key, headers)
+              │                    │        └ None
+              │                    └ None
+              └ <function validate_environment at 0x7f6bd95176d0>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/litellm/llms/anthropic.py", line 90, in validate_environment
+    raise ValueError(
+
+ValueError: Missing Anthropic API Key - A call is being made to anthropic but no key is set either in the environment variables or via params
+
+
+During handling of the above exception, another exception occurred:
+
+
+Traceback (most recent call last):
+
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/litellm/main.py", line 319, in acompletion
+    response = await loop.run_in_executor(None, func_with_context)  # type: ignore
+                     │    │                     └ functools.partial(<built-in method run of _contextvars.Context object at 0x7f6bd95f2c00>, functools.partial(<function complet...
+                     │    └ <method 'run_in_executor' of 'uvloop.loop.Loop' objects>
+                     └ <uvloop.Loop running=True closed=False debug=False>
+  File "/home/teilo/.miniforge3/lib/python3.10/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+             │        │            └ None
+             │        └ None
+             └ None
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/litellm/utils.py", line 2770, in wrapper
+    raise e
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/litellm/utils.py", line 2667, in wrapper
+    result = original_function(*args, **kwargs)
+             │                  │       └ {'model': 'claude-3-haiku-20240307', 'messages': [{'role': 'user', 'content': "Here's are the previous part of a friendly con...
+             │                  └ ()
+             └ <function completion at 0x7f6bd9623d00>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/litellm/main.py", line 2094, in completion
+    raise exception_type(
+          └ <function exception_type at 0x7f6bd935ec20>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/litellm/utils.py", line 8257, in exception_type
+    raise e
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/litellm/utils.py", line 8232, in exception_type
+    raise APIConnectionError(
+          └ <class 'litellm.exceptions.APIConnectionError'>
+
+litellm.exceptions.APIConnectionError: Missing Anthropic API Key - A call is being made to anthropic but no key is set either in the environment variables or via params
+
+
+During handling of the above exception, another exception occurred:
+
+
+Traceback (most recent call last):
+
+  File "<string>", line 1, in <module>
+  File "/home/teilo/.miniforge3/lib/python3.10/multiprocessing/spawn.py", line 116, in spawn_main
+    exitcode = _main(fd, parent_sentinel)
+               │     │   └ 5
+               │     └ 8
+               └ <function _main at 0x7f6bddfaf400>
+  File "/home/teilo/.miniforge3/lib/python3.10/multiprocessing/spawn.py", line 129, in _main
+    return self._bootstrap(parent_sentinel)
+           │    │          └ 5
+           │    └ <function BaseProcess._bootstrap at 0x7f6bde135d80>
+           └ <SpawnProcess name='SpawnProcess-1' parent=18899 started>
+  File "/home/teilo/.miniforge3/lib/python3.10/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+    │    └ <function BaseProcess.run at 0x7f6bde1353f0>
+    └ <SpawnProcess name='SpawnProcess-1' parent=18899 started>
+  File "/home/teilo/.miniforge3/lib/python3.10/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+    │    │        │    │        │    └ {'config': <uvicorn.config.Config object at 0x7f6bddfc7190>, 'target': <bound method Server.run of <uvicorn.server.Server obj...
+    │    │        │    │        └ <SpawnProcess name='SpawnProcess-1' parent=18899 started>
+    │    │        │    └ ()
+    │    │        └ <SpawnProcess name='SpawnProcess-1' parent=18899 started>
+    │    └ <function subprocess_started at 0x7f6bdd5c35b0>
+    └ <SpawnProcess name='SpawnProcess-1' parent=18899 started>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/uvicorn/_subprocess.py", line 78, in subprocess_started
+    target(sockets=sockets)
+    │              └ [<socket.socket fd=4, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8000)>]
+    └ <bound method Server.run of <uvicorn.server.Server object at 0x7f6bddfc71f0>>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/uvicorn/server.py", line 62, in run
+    return asyncio.run(self.serve(sockets=sockets))
+           │       │   │    │             └ [<socket.socket fd=4, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8000)>]
+           │       │   │    └ <function Server.serve at 0x7f6bdd5c2680>
+           │       │   └ <uvicorn.server.Server object at 0x7f6bddfc71f0>
+           │       └ <function run at 0x7f6bdd77b1c0>
+           └ <module 'asyncio' from '/home/teilo/.miniforge3/lib/python3.10/asyncio/__init__.py'>
+  File "/home/teilo/.miniforge3/lib/python3.10/asyncio/runners.py", line 44, in run
+    return loop.run_until_complete(main)
+           │    │                  └ <coroutine object Server.serve at 0x7f6bdd28dd20>
+           │    └ <method 'run_until_complete' of 'uvloop.loop.Loop' objects>
+           └ <uvloop.Loop running=True closed=False debug=False>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/uvicorn/protocols/http/httptools_impl.py", line 412, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+                   └ <uvicorn.middleware.proxy_headers.ProxyHeadersMiddleware object at 0x7f6bdd2a2c80>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/uvicorn/middleware/proxy_headers.py", line 69, in __call__
+    return await self.app(scope, receive, send)
+                 │    │   │      │        └ <bound method RequestResponseCycle.send of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7f6bd96492...
+                 │    │   │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7f6bd96...
+                 │    │   └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.4'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+                 │    └ <fastapi.applications.FastAPI object at 0x7f6bd94b5420>
+                 └ <uvicorn.middleware.proxy_headers.ProxyHeadersMiddleware object at 0x7f6bdd2a2c80>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+                           │      │        └ <bound method RequestResponseCycle.send of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7f6bd96492...
+                           │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7f6bd96...
+                           └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.4'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/starlette/applications.py", line 123, in __call__
+    await self.middleware_stack(scope, receive, send)
+          │    │                │      │        └ <bound method RequestResponseCycle.send of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7f6bd96492...
+          │    │                │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7f6bd96...
+          │    │                └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.4'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          │    └ <starlette.middleware.errors.ServerErrorMiddleware object at 0x7f6bd94b56f0>
+          └ <fastapi.applications.FastAPI object at 0x7f6bd94b5420>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/starlette/middleware/errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+          │    │   │      │        └ <function ServerErrorMiddleware.__call__.<locals>._send at 0x7f6bd960f910>
+          │    │   │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7f6bd96...
+          │    │   └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.4'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          │    └ <starlette.middleware.cors.CORSMiddleware object at 0x7f6bd94b58d0>
+          └ <starlette.middleware.errors.ServerErrorMiddleware object at 0x7f6bd94b56f0>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/starlette/middleware/cors.py", line 91, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+          │    │               │      │        │                     └ Headers({'host': '127.0.0.1:8000', 'connection': 'keep-alive', 'content-length': '41', 'sec-ch-ua': '"Brave";v="123", "Not:A-...
+          │    │               │      │        └ <function ServerErrorMiddleware.__call__.<locals>._send at 0x7f6bd960f910>
+          │    │               │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7f6bd96...
+          │    │               └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.4'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          │    └ <function CORSMiddleware.simple_response at 0x7f6bd958dd80>
+          └ <starlette.middleware.cors.CORSMiddleware object at 0x7f6bd94b58d0>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/starlette/middleware/cors.py", line 146, in simple_response
+    await self.app(scope, receive, send)
+          │    │   │      │        └ functools.partial(<bound method CORSMiddleware.send of <starlette.middleware.cors.CORSMiddleware object at 0x7f6bd94b58d0>>, ...
+          │    │   │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7f6bd96...
+          │    │   └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.4'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          │    └ <starlette.middleware.exceptions.ExceptionMiddleware object at 0x7f6bd94b56c0>
+          └ <starlette.middleware.cors.CORSMiddleware object at 0x7f6bd94b58d0>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/starlette/middleware/exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+          │                            │    │    │     │      │        └ functools.partial(<bound method CORSMiddleware.send of <starlette.middleware.cors.CORSMiddleware object at 0x7f6bd94b58d0>>, ...
+          │                            │    │    │     │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7f6bd96...
+          │                            │    │    │     └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.4'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          │                            │    │    └ <starlette.requests.Request object at 0x7f6bd9649fc0>
+          │                            │    └ <fastapi.routing.APIRouter object at 0x7f6bd94b5210>
+          │                            └ <starlette.middleware.exceptions.ExceptionMiddleware object at 0x7f6bd94b56c0>
+          └ <function wrap_app_handling_exceptions at 0x7f6bdc073b50>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    await app(scope, receive, sender)
+          │   │      │        └ <function wrap_app_handling_exceptions.<locals>.wrapped_app.<locals>.sender at 0x7f6bd960fac0>
+          │   │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7f6bd96...
+          │   └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.4'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          └ <fastapi.routing.APIRouter object at 0x7f6bd94b5210>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/starlette/routing.py", line 758, in __call__
+    await self.middleware_stack(scope, receive, send)
+          │    │                │      │        └ <function wrap_app_handling_exceptions.<locals>.wrapped_app.<locals>.sender at 0x7f6bd960fac0>
+          │    │                │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7f6bd96...
+          │    │                └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.4'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          │    └ <bound method Router.app of <fastapi.routing.APIRouter object at 0x7f6bd94b5210>>
+          └ <fastapi.routing.APIRouter object at 0x7f6bd94b5210>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/starlette/routing.py", line 778, in app
+    await route.handle(scope, receive, send)
+          │     │      │      │        └ <function wrap_app_handling_exceptions.<locals>.wrapped_app.<locals>.sender at 0x7f6bd960fac0>
+          │     │      │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7f6bd96...
+          │     │      └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.4'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          │     └ <function Route.handle at 0x7f6bdc005000>
+          └ APIRoute(path='/chat/', name='chat', methods=['POST'])
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/starlette/routing.py", line 299, in handle
+    await self.app(scope, receive, send)
+          │    │   │      │        └ <function wrap_app_handling_exceptions.<locals>.wrapped_app.<locals>.sender at 0x7f6bd960fac0>
+          │    │   │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7f6bd96...
+          │    │   └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.4'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          │    └ <function request_response.<locals>.app at 0x7f6bd958e4d0>
+          └ APIRoute(path='/chat/', name='chat', methods=['POST'])
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/starlette/routing.py", line 79, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+          │                            │    │        │      │        └ <function wrap_app_handling_exceptions.<locals>.wrapped_app.<locals>.sender at 0x7f6bd960fac0>
+          │                            │    │        │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7f6bd96...
+          │                            │    │        └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.4'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          │                            │    └ <starlette.requests.Request object at 0x7f6bd9648310>
+          │                            └ <function request_response.<locals>.app.<locals>.app at 0x7f6bd960fe20>
+          └ <function wrap_app_handling_exceptions at 0x7f6bdc073b50>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    await app(scope, receive, sender)
+          │   │      │        └ <function wrap_app_handling_exceptions.<locals>.wrapped_app.<locals>.sender at 0x7f6bd960fd00>
+          │   │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7f6bd96...
+          │   └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.4'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          └ <function request_response.<locals>.app.<locals>.app at 0x7f6bd960fe20>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/starlette/routing.py", line 74, in app
+    response = await func(request)
+                     │    └ <starlette.requests.Request object at 0x7f6bd9648310>
+                     └ <function get_request_handler.<locals>.app at 0x7f6bd958e440>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/fastapi/routing.py", line 278, in app
+    raw_response = await run_endpoint_function(
+                         └ <function run_endpoint_function at 0x7f6bdc005ea0>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/fastapi/routing.py", line 191, in run_endpoint_function
+    return await dependant.call(**values)
+                 │         │      └ {'request': ChatRequest(model='claude-3-haiku', content='yo')}
+                 │         └ <function chat at 0x7f6bd960f7f0>
+                 └ <fastapi.dependencies.models.Dependant object at 0x7f6bd94b4190>
+
+  File "/home/teilo/Code/lugia/api/main.py", line 41, in chat
+    response = await model_manager.generate_response(request.model, [asdict(msg) for msg in formatted_messages])
+                     │             │                 │       │       │                      └ [Message(id='d76e0144-4ade-4100-98c3-9df1a53b63ba', role='user', content="Here's are the previous part of a friendly conversa...
+                     │             │                 │       │       └ <function asdict at 0x7f6bdd39bc70>
+                     │             │                 │       └ 'claude-3-haiku'
+                     │             │                 └ ChatRequest(model='claude-3-haiku', content='yo')
+                     │             └ <function ModelManager.generate_response at 0x7f6bd958d870>
+                     └ <core.model.ModelManager object at 0x7f6bd94b6d70>
+
+> File "/home/teilo/Code/lugia/core/model.py", line 30, in generate_response
+    response = await litellm.acompletion(model=model_name, messages=formatted_messages, max_tokens=4096)
+                     │       │                 │                    └ [{'role': 'user', 'content': "Here's are the previous part of a friendly conversation:\n\nuser: yo"}]
+                     │       │                 └ 'claude-3-haiku-20240307'
+                     │       └ <function acompletion at 0x7f6bd9623be0>
+                     └ <module 'litellm' from '/home/teilo/.miniforge3/lib/python3.10/site-packages/litellm/__init__.py'>
+
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/litellm/utils.py", line 3230, in wrapper_async
+    raise e
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/litellm/utils.py", line 3062, in wrapper_async
+    result = await original_function(*args, **kwargs)
+                   │                  │       └ {'model': 'claude-3-haiku-20240307', 'messages': [{'role': 'user', 'content': "Here's are the previous part of a friendly con...
+                   │                  └ ()
+                   └ <function acompletion at 0x7f6bd9620af0>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/litellm/main.py", line 327, in acompletion
+    raise exception_type(
+          └ <function exception_type at 0x7f6bd935ec20>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/litellm/utils.py", line 8257, in exception_type
+    raise e
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/litellm/utils.py", line 7194, in exception_type
+    raise ServiceUnavailableError(
+          └ <class 'litellm.exceptions.ServiceUnavailableError'>
+
+litellm.exceptions.ServiceUnavailableError: AnthropicException - Missing Anthropic API Key - A call is being made to anthropic but no key is set either in the environment variables or via params
+2024-03-26 16:02:27.544 | ERROR    | api.main:chat:47 - Failed to process chat request
+Traceback (most recent call last):
+
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/litellm/main.py", line 1164, in completion
+    response = anthropic.completion(
+               │         └ <function completion at 0x7f6bd9517eb0>
+               └ <module 'litellm.llms.anthropic' from '/home/teilo/.miniforge3/lib/python3.10/site-packages/litellm/llms/anthropic.py'>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/litellm/llms/anthropic.py", line 119, in completion
+    headers = validate_environment(api_key, headers)
+              │                    │        └ None
+              │                    └ None
+              └ <function validate_environment at 0x7f6bd95176d0>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/litellm/llms/anthropic.py", line 90, in validate_environment
+    raise ValueError(
+
+ValueError: Missing Anthropic API Key - A call is being made to anthropic but no key is set either in the environment variables or via params
+
+
+During handling of the above exception, another exception occurred:
+
+
+Traceback (most recent call last):
+
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/litellm/main.py", line 319, in acompletion
+    response = await loop.run_in_executor(None, func_with_context)  # type: ignore
+                     │    │                     └ functools.partial(<built-in method run of _contextvars.Context object at 0x7f6bd95f2c00>, functools.partial(<function complet...
+                     │    └ <method 'run_in_executor' of 'uvloop.loop.Loop' objects>
+                     └ <uvloop.Loop running=True closed=False debug=False>
+  File "/home/teilo/.miniforge3/lib/python3.10/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+             │        │            └ None
+             │        └ None
+             └ None
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/litellm/utils.py", line 2770, in wrapper
+    raise e
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/litellm/utils.py", line 2667, in wrapper
+    result = original_function(*args, **kwargs)
+             │                  │       └ {'model': 'claude-3-haiku-20240307', 'messages': [{'role': 'user', 'content': "Here's are the previous part of a friendly con...
+             │                  └ ()
+             └ <function completion at 0x7f6bd9623d00>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/litellm/main.py", line 2094, in completion
+    raise exception_type(
+          └ <function exception_type at 0x7f6bd935ec20>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/litellm/utils.py", line 8257, in exception_type
+    raise e
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/litellm/utils.py", line 8232, in exception_type
+    raise APIConnectionError(
+          └ <class 'litellm.exceptions.APIConnectionError'>
+
+litellm.exceptions.APIConnectionError: Missing Anthropic API Key - A call is being made to anthropic but no key is set either in the environment variables or via params
+
+
+During handling of the above exception, another exception occurred:
+
+
+Traceback (most recent call last):
+
+  File "<string>", line 1, in <module>
+  File "/home/teilo/.miniforge3/lib/python3.10/multiprocessing/spawn.py", line 116, in spawn_main
+    exitcode = _main(fd, parent_sentinel)
+               │     │   └ 5
+               │     └ 8
+               └ <function _main at 0x7f6bddfaf400>
+  File "/home/teilo/.miniforge3/lib/python3.10/multiprocessing/spawn.py", line 129, in _main
+    return self._bootstrap(parent_sentinel)
+           │    │          └ 5
+           │    └ <function BaseProcess._bootstrap at 0x7f6bde135d80>
+           └ <SpawnProcess name='SpawnProcess-1' parent=18899 started>
+  File "/home/teilo/.miniforge3/lib/python3.10/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+    │    └ <function BaseProcess.run at 0x7f6bde1353f0>
+    └ <SpawnProcess name='SpawnProcess-1' parent=18899 started>
+  File "/home/teilo/.miniforge3/lib/python3.10/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+    │    │        │    │        │    └ {'config': <uvicorn.config.Config object at 0x7f6bddfc7190>, 'target': <bound method Server.run of <uvicorn.server.Server obj...
+    │    │        │    │        └ <SpawnProcess name='SpawnProcess-1' parent=18899 started>
+    │    │        │    └ ()
+    │    │        └ <SpawnProcess name='SpawnProcess-1' parent=18899 started>
+    │    └ <function subprocess_started at 0x7f6bdd5c35b0>
+    └ <SpawnProcess name='SpawnProcess-1' parent=18899 started>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/uvicorn/_subprocess.py", line 78, in subprocess_started
+    target(sockets=sockets)
+    │              └ [<socket.socket fd=4, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8000)>]
+    └ <bound method Server.run of <uvicorn.server.Server object at 0x7f6bddfc71f0>>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/uvicorn/server.py", line 62, in run
+    return asyncio.run(self.serve(sockets=sockets))
+           │       │   │    │             └ [<socket.socket fd=4, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8000)>]
+           │       │   │    └ <function Server.serve at 0x7f6bdd5c2680>
+           │       │   └ <uvicorn.server.Server object at 0x7f6bddfc71f0>
+           │       └ <function run at 0x7f6bdd77b1c0>
+           └ <module 'asyncio' from '/home/teilo/.miniforge3/lib/python3.10/asyncio/__init__.py'>
+  File "/home/teilo/.miniforge3/lib/python3.10/asyncio/runners.py", line 44, in run
+    return loop.run_until_complete(main)
+           │    │                  └ <coroutine object Server.serve at 0x7f6bdd28dd20>
+           │    └ <method 'run_until_complete' of 'uvloop.loop.Loop' objects>
+           └ <uvloop.Loop running=True closed=False debug=False>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/uvicorn/protocols/http/httptools_impl.py", line 412, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+                   └ <uvicorn.middleware.proxy_headers.ProxyHeadersMiddleware object at 0x7f6bdd2a2c80>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/uvicorn/middleware/proxy_headers.py", line 69, in __call__
+    return await self.app(scope, receive, send)
+                 │    │   │      │        └ <bound method RequestResponseCycle.send of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7f6bd96492...
+                 │    │   │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7f6bd96...
+                 │    │   └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.4'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+                 │    └ <fastapi.applications.FastAPI object at 0x7f6bd94b5420>
+                 └ <uvicorn.middleware.proxy_headers.ProxyHeadersMiddleware object at 0x7f6bdd2a2c80>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+                           │      │        └ <bound method RequestResponseCycle.send of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7f6bd96492...
+                           │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7f6bd96...
+                           └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.4'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/starlette/applications.py", line 123, in __call__
+    await self.middleware_stack(scope, receive, send)
+          │    │                │      │        └ <bound method RequestResponseCycle.send of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7f6bd96492...
+          │    │                │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7f6bd96...
+          │    │                └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.4'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          │    └ <starlette.middleware.errors.ServerErrorMiddleware object at 0x7f6bd94b56f0>
+          └ <fastapi.applications.FastAPI object at 0x7f6bd94b5420>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/starlette/middleware/errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+          │    │   │      │        └ <function ServerErrorMiddleware.__call__.<locals>._send at 0x7f6bd960f910>
+          │    │   │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7f6bd96...
+          │    │   └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.4'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          │    └ <starlette.middleware.cors.CORSMiddleware object at 0x7f6bd94b58d0>
+          └ <starlette.middleware.errors.ServerErrorMiddleware object at 0x7f6bd94b56f0>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/starlette/middleware/cors.py", line 91, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+          │    │               │      │        │                     └ Headers({'host': '127.0.0.1:8000', 'connection': 'keep-alive', 'content-length': '41', 'sec-ch-ua': '"Brave";v="123", "Not:A-...
+          │    │               │      │        └ <function ServerErrorMiddleware.__call__.<locals>._send at 0x7f6bd960f910>
+          │    │               │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7f6bd96...
+          │    │               └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.4'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          │    └ <function CORSMiddleware.simple_response at 0x7f6bd958dd80>
+          └ <starlette.middleware.cors.CORSMiddleware object at 0x7f6bd94b58d0>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/starlette/middleware/cors.py", line 146, in simple_response
+    await self.app(scope, receive, send)
+          │    │   │      │        └ functools.partial(<bound method CORSMiddleware.send of <starlette.middleware.cors.CORSMiddleware object at 0x7f6bd94b58d0>>, ...
+          │    │   │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7f6bd96...
+          │    │   └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.4'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          │    └ <starlette.middleware.exceptions.ExceptionMiddleware object at 0x7f6bd94b56c0>
+          └ <starlette.middleware.cors.CORSMiddleware object at 0x7f6bd94b58d0>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/starlette/middleware/exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+          │                            │    │    │     │      │        └ functools.partial(<bound method CORSMiddleware.send of <starlette.middleware.cors.CORSMiddleware object at 0x7f6bd94b58d0>>, ...
+          │                            │    │    │     │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7f6bd96...
+          │                            │    │    │     └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.4'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          │                            │    │    └ <starlette.requests.Request object at 0x7f6bd9649fc0>
+          │                            │    └ <fastapi.routing.APIRouter object at 0x7f6bd94b5210>
+          │                            └ <starlette.middleware.exceptions.ExceptionMiddleware object at 0x7f6bd94b56c0>
+          └ <function wrap_app_handling_exceptions at 0x7f6bdc073b50>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    await app(scope, receive, sender)
+          │   │      │        └ <function wrap_app_handling_exceptions.<locals>.wrapped_app.<locals>.sender at 0x7f6bd960fac0>
+          │   │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7f6bd96...
+          │   └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.4'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          └ <fastapi.routing.APIRouter object at 0x7f6bd94b5210>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/starlette/routing.py", line 758, in __call__
+    await self.middleware_stack(scope, receive, send)
+          │    │                │      │        └ <function wrap_app_handling_exceptions.<locals>.wrapped_app.<locals>.sender at 0x7f6bd960fac0>
+          │    │                │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7f6bd96...
+          │    │                └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.4'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          │    └ <bound method Router.app of <fastapi.routing.APIRouter object at 0x7f6bd94b5210>>
+          └ <fastapi.routing.APIRouter object at 0x7f6bd94b5210>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/starlette/routing.py", line 778, in app
+    await route.handle(scope, receive, send)
+          │     │      │      │        └ <function wrap_app_handling_exceptions.<locals>.wrapped_app.<locals>.sender at 0x7f6bd960fac0>
+          │     │      │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7f6bd96...
+          │     │      └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.4'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          │     └ <function Route.handle at 0x7f6bdc005000>
+          └ APIRoute(path='/chat/', name='chat', methods=['POST'])
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/starlette/routing.py", line 299, in handle
+    await self.app(scope, receive, send)
+          │    │   │      │        └ <function wrap_app_handling_exceptions.<locals>.wrapped_app.<locals>.sender at 0x7f6bd960fac0>
+          │    │   │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7f6bd96...
+          │    │   └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.4'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          │    └ <function request_response.<locals>.app at 0x7f6bd958e4d0>
+          └ APIRoute(path='/chat/', name='chat', methods=['POST'])
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/starlette/routing.py", line 79, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+          │                            │    │        │      │        └ <function wrap_app_handling_exceptions.<locals>.wrapped_app.<locals>.sender at 0x7f6bd960fac0>
+          │                            │    │        │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7f6bd96...
+          │                            │    │        └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.4'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          │                            │    └ <starlette.requests.Request object at 0x7f6bd9648310>
+          │                            └ <function request_response.<locals>.app.<locals>.app at 0x7f6bd960fe20>
+          └ <function wrap_app_handling_exceptions at 0x7f6bdc073b50>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    await app(scope, receive, sender)
+          │   │      │        └ <function wrap_app_handling_exceptions.<locals>.wrapped_app.<locals>.sender at 0x7f6bd960fd00>
+          │   │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7f6bd96...
+          │   └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.4'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          └ <function request_response.<locals>.app.<locals>.app at 0x7f6bd960fe20>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/starlette/routing.py", line 74, in app
+    response = await func(request)
+                     │    └ <starlette.requests.Request object at 0x7f6bd9648310>
+                     └ <function get_request_handler.<locals>.app at 0x7f6bd958e440>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/fastapi/routing.py", line 278, in app
+    raw_response = await run_endpoint_function(
+                         └ <function run_endpoint_function at 0x7f6bdc005ea0>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/fastapi/routing.py", line 191, in run_endpoint_function
+    return await dependant.call(**values)
+                 │         │      └ {'request': ChatRequest(model='claude-3-haiku', content='yo')}
+                 │         └ <function chat at 0x7f6bd960f7f0>
+                 └ <fastapi.dependencies.models.Dependant object at 0x7f6bd94b4190>
+
+> File "/home/teilo/Code/lugia/api/main.py", line 41, in chat
+    response = await model_manager.generate_response(request.model, [asdict(msg) for msg in formatted_messages])
+                     │             │                 │       │       │                      └ [Message(id='d76e0144-4ade-4100-98c3-9df1a53b63ba', role='user', content="Here's are the previous part of a friendly conversa...
+                     │             │                 │       │       └ <function asdict at 0x7f6bdd39bc70>
+                     │             │                 │       └ 'claude-3-haiku'
+                     │             │                 └ ChatRequest(model='claude-3-haiku', content='yo')
+                     │             └ <function ModelManager.generate_response at 0x7f6bd958d870>
+                     └ <core.model.ModelManager object at 0x7f6bd94b6d70>
+
+  File "/home/teilo/Code/lugia/core/model.py", line 35, in generate_response
+    raise e
+
+  File "/home/teilo/Code/lugia/core/model.py", line 30, in generate_response
+    response = await litellm.acompletion(model=model_name, messages=formatted_messages, max_tokens=4096)
+                     │       │                 │                    └ [{'role': 'user', 'content': "Here's are the previous part of a friendly conversation:\n\nuser: yo"}]
+                     │       │                 └ 'claude-3-haiku-20240307'
+                     │       └ <function acompletion at 0x7f6bd9623be0>
+                     └ <module 'litellm' from '/home/teilo/.miniforge3/lib/python3.10/site-packages/litellm/__init__.py'>
+
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/litellm/utils.py", line 3230, in wrapper_async
+    raise e
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/litellm/utils.py", line 3062, in wrapper_async
+    result = await original_function(*args, **kwargs)
+                   │                  │       └ {'model': 'claude-3-haiku-20240307', 'messages': [{'role': 'user', 'content': "Here's are the previous part of a friendly con...
+                   │                  └ ()
+                   └ <function acompletion at 0x7f6bd9620af0>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/litellm/main.py", line 327, in acompletion
+    raise exception_type(
+          └ <function exception_type at 0x7f6bd935ec20>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/litellm/utils.py", line 8257, in exception_type
+    raise e
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/litellm/utils.py", line 7194, in exception_type
+    raise ServiceUnavailableError(
+          └ <class 'litellm.exceptions.ServiceUnavailableError'>
+
+litellm.exceptions.ServiceUnavailableError: AnthropicException - Missing Anthropic API Key - A call is being made to anthropic but no key is set either in the environment variables or via params
+2024-03-26 16:02:27.544 | ERROR    | api.main:chat:47 - Failed to process chat request
+Traceback (most recent call last):
+
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/litellm/main.py", line 1164, in completion
+    response = anthropic.completion(
+               │         └ <function completion at 0x7f6bd9517eb0>
+               └ <module 'litellm.llms.anthropic' from '/home/teilo/.miniforge3/lib/python3.10/site-packages/litellm/llms/anthropic.py'>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/litellm/llms/anthropic.py", line 119, in completion
+    headers = validate_environment(api_key, headers)
+              │                    │        └ None
+              │                    └ None
+              └ <function validate_environment at 0x7f6bd95176d0>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/litellm/llms/anthropic.py", line 90, in validate_environment
+    raise ValueError(
+
+ValueError: Missing Anthropic API Key - A call is being made to anthropic but no key is set either in the environment variables or via params
+
+
+During handling of the above exception, another exception occurred:
+
+
+Traceback (most recent call last):
+
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/litellm/main.py", line 319, in acompletion
+    response = await loop.run_in_executor(None, func_with_context)  # type: ignore
+                     │    │                     └ functools.partial(<built-in method run of _contextvars.Context object at 0x7f6bd95f2c00>, functools.partial(<function complet...
+                     │    └ <method 'run_in_executor' of 'uvloop.loop.Loop' objects>
+                     └ <uvloop.Loop running=True closed=False debug=False>
+  File "/home/teilo/.miniforge3/lib/python3.10/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+             │        │            └ None
+             │        └ None
+             └ None
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/litellm/utils.py", line 2770, in wrapper
+    raise e
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/litellm/utils.py", line 2667, in wrapper
+    result = original_function(*args, **kwargs)
+             │                  │       └ {'model': 'claude-3-haiku-20240307', 'messages': [{'role': 'user', 'content': "Here's are the previous part of a friendly con...
+             │                  └ ()
+             └ <function completion at 0x7f6bd9623d00>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/litellm/main.py", line 2094, in completion
+    raise exception_type(
+          └ <function exception_type at 0x7f6bd935ec20>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/litellm/utils.py", line 8257, in exception_type
+    raise e
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/litellm/utils.py", line 8232, in exception_type
+    raise APIConnectionError(
+          └ <class 'litellm.exceptions.APIConnectionError'>
+
+litellm.exceptions.APIConnectionError: Missing Anthropic API Key - A call is being made to anthropic but no key is set either in the environment variables or via params
+
+
+During handling of the above exception, another exception occurred:
+
+
+Traceback (most recent call last):
+
+  File "<string>", line 1, in <module>
+  File "/home/teilo/.miniforge3/lib/python3.10/multiprocessing/spawn.py", line 116, in spawn_main
+    exitcode = _main(fd, parent_sentinel)
+               │     │   └ 5
+               │     └ 8
+               └ <function _main at 0x7f6bddfaf400>
+  File "/home/teilo/.miniforge3/lib/python3.10/multiprocessing/spawn.py", line 129, in _main
+    return self._bootstrap(parent_sentinel)
+           │    │          └ 5
+           │    └ <function BaseProcess._bootstrap at 0x7f6bde135d80>
+           └ <SpawnProcess name='SpawnProcess-1' parent=18899 started>
+  File "/home/teilo/.miniforge3/lib/python3.10/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+    │    └ <function BaseProcess.run at 0x7f6bde1353f0>
+    └ <SpawnProcess name='SpawnProcess-1' parent=18899 started>
+  File "/home/teilo/.miniforge3/lib/python3.10/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+    │    │        │    │        │    └ {'config': <uvicorn.config.Config object at 0x7f6bddfc7190>, 'target': <bound method Server.run of <uvicorn.server.Server obj...
+    │    │        │    │        └ <SpawnProcess name='SpawnProcess-1' parent=18899 started>
+    │    │        │    └ ()
+    │    │        └ <SpawnProcess name='SpawnProcess-1' parent=18899 started>
+    │    └ <function subprocess_started at 0x7f6bdd5c35b0>
+    └ <SpawnProcess name='SpawnProcess-1' parent=18899 started>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/uvicorn/_subprocess.py", line 78, in subprocess_started
+    target(sockets=sockets)
+    │              └ [<socket.socket fd=4, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8000)>]
+    └ <bound method Server.run of <uvicorn.server.Server object at 0x7f6bddfc71f0>>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/uvicorn/server.py", line 62, in run
+    return asyncio.run(self.serve(sockets=sockets))
+           │       │   │    │             └ [<socket.socket fd=4, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8000)>]
+           │       │   │    └ <function Server.serve at 0x7f6bdd5c2680>
+           │       │   └ <uvicorn.server.Server object at 0x7f6bddfc71f0>
+           │       └ <function run at 0x7f6bdd77b1c0>
+           └ <module 'asyncio' from '/home/teilo/.miniforge3/lib/python3.10/asyncio/__init__.py'>
+  File "/home/teilo/.miniforge3/lib/python3.10/asyncio/runners.py", line 44, in run
+    return loop.run_until_complete(main)
+           │    │                  └ <coroutine object Server.serve at 0x7f6bdd28dd20>
+           │    └ <method 'run_until_complete' of 'uvloop.loop.Loop' objects>
+           └ <uvloop.Loop running=True closed=False debug=False>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/uvicorn/protocols/http/httptools_impl.py", line 412, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+                   └ <uvicorn.middleware.proxy_headers.ProxyHeadersMiddleware object at 0x7f6bdd2a2c80>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/uvicorn/middleware/proxy_headers.py", line 69, in __call__
+    return await self.app(scope, receive, send)
+                 │    │   │      │        └ <bound method RequestResponseCycle.send of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7f6bd96492...
+                 │    │   │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7f6bd96...
+                 │    │   └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.4'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+                 │    └ <fastapi.applications.FastAPI object at 0x7f6bd94b5420>
+                 └ <uvicorn.middleware.proxy_headers.ProxyHeadersMiddleware object at 0x7f6bdd2a2c80>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+                           │      │        └ <bound method RequestResponseCycle.send of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7f6bd96492...
+                           │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7f6bd96...
+                           └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.4'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/starlette/applications.py", line 123, in __call__
+    await self.middleware_stack(scope, receive, send)
+          │    │                │      │        └ <bound method RequestResponseCycle.send of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7f6bd96492...
+          │    │                │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7f6bd96...
+          │    │                └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.4'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          │    └ <starlette.middleware.errors.ServerErrorMiddleware object at 0x7f6bd94b56f0>
+          └ <fastapi.applications.FastAPI object at 0x7f6bd94b5420>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/starlette/middleware/errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+          │    │   │      │        └ <function ServerErrorMiddleware.__call__.<locals>._send at 0x7f6bd960f910>
+          │    │   │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7f6bd96...
+          │    │   └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.4'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          │    └ <starlette.middleware.cors.CORSMiddleware object at 0x7f6bd94b58d0>
+          └ <starlette.middleware.errors.ServerErrorMiddleware object at 0x7f6bd94b56f0>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/starlette/middleware/cors.py", line 91, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+          │    │               │      │        │                     └ Headers({'host': '127.0.0.1:8000', 'connection': 'keep-alive', 'content-length': '41', 'sec-ch-ua': '"Brave";v="123", "Not:A-...
+          │    │               │      │        └ <function ServerErrorMiddleware.__call__.<locals>._send at 0x7f6bd960f910>
+          │    │               │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7f6bd96...
+          │    │               └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.4'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          │    └ <function CORSMiddleware.simple_response at 0x7f6bd958dd80>
+          └ <starlette.middleware.cors.CORSMiddleware object at 0x7f6bd94b58d0>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/starlette/middleware/cors.py", line 146, in simple_response
+    await self.app(scope, receive, send)
+          │    │   │      │        └ functools.partial(<bound method CORSMiddleware.send of <starlette.middleware.cors.CORSMiddleware object at 0x7f6bd94b58d0>>, ...
+          │    │   │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7f6bd96...
+          │    │   └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.4'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          │    └ <starlette.middleware.exceptions.ExceptionMiddleware object at 0x7f6bd94b56c0>
+          └ <starlette.middleware.cors.CORSMiddleware object at 0x7f6bd94b58d0>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/starlette/middleware/exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+          │                            │    │    │     │      │        └ functools.partial(<bound method CORSMiddleware.send of <starlette.middleware.cors.CORSMiddleware object at 0x7f6bd94b58d0>>, ...
+          │                            │    │    │     │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7f6bd96...
+          │                            │    │    │     └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.4'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          │                            │    │    └ <starlette.requests.Request object at 0x7f6bd9649fc0>
+          │                            │    └ <fastapi.routing.APIRouter object at 0x7f6bd94b5210>
+          │                            └ <starlette.middleware.exceptions.ExceptionMiddleware object at 0x7f6bd94b56c0>
+          └ <function wrap_app_handling_exceptions at 0x7f6bdc073b50>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    await app(scope, receive, sender)
+          │   │      │        └ <function wrap_app_handling_exceptions.<locals>.wrapped_app.<locals>.sender at 0x7f6bd960fac0>
+          │   │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7f6bd96...
+          │   └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.4'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          └ <fastapi.routing.APIRouter object at 0x7f6bd94b5210>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/starlette/routing.py", line 758, in __call__
+    await self.middleware_stack(scope, receive, send)
+          │    │                │      │        └ <function wrap_app_handling_exceptions.<locals>.wrapped_app.<locals>.sender at 0x7f6bd960fac0>
+          │    │                │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7f6bd96...
+          │    │                └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.4'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          │    └ <bound method Router.app of <fastapi.routing.APIRouter object at 0x7f6bd94b5210>>
+          └ <fastapi.routing.APIRouter object at 0x7f6bd94b5210>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/starlette/routing.py", line 778, in app
+    await route.handle(scope, receive, send)
+          │     │      │      │        └ <function wrap_app_handling_exceptions.<locals>.wrapped_app.<locals>.sender at 0x7f6bd960fac0>
+          │     │      │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7f6bd96...
+          │     │      └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.4'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          │     └ <function Route.handle at 0x7f6bdc005000>
+          └ APIRoute(path='/chat/', name='chat', methods=['POST'])
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/starlette/routing.py", line 299, in handle
+    await self.app(scope, receive, send)
+          │    │   │      │        └ <function wrap_app_handling_exceptions.<locals>.wrapped_app.<locals>.sender at 0x7f6bd960fac0>
+          │    │   │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7f6bd96...
+          │    │   └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.4'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          │    └ <function request_response.<locals>.app at 0x7f6bd958e4d0>
+          └ APIRoute(path='/chat/', name='chat', methods=['POST'])
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/starlette/routing.py", line 79, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+          │                            │    │        │      │        └ <function wrap_app_handling_exceptions.<locals>.wrapped_app.<locals>.sender at 0x7f6bd960fac0>
+          │                            │    │        │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7f6bd96...
+          │                            │    │        └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.4'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          │                            │    └ <starlette.requests.Request object at 0x7f6bd9648310>
+          │                            └ <function request_response.<locals>.app.<locals>.app at 0x7f6bd960fe20>
+          └ <function wrap_app_handling_exceptions at 0x7f6bdc073b50>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    await app(scope, receive, sender)
+          │   │      │        └ <function wrap_app_handling_exceptions.<locals>.wrapped_app.<locals>.sender at 0x7f6bd960fd00>
+          │   │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7f6bd96...
+          │   └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.4'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          └ <function request_response.<locals>.app.<locals>.app at 0x7f6bd960fe20>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/starlette/routing.py", line 74, in app
+    response = await func(request)
+                     │    └ <starlette.requests.Request object at 0x7f6bd9648310>
+                     └ <function get_request_handler.<locals>.app at 0x7f6bd958e440>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/fastapi/routing.py", line 278, in app
+    raw_response = await run_endpoint_function(
+                         └ <function run_endpoint_function at 0x7f6bdc005ea0>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/fastapi/routing.py", line 191, in run_endpoint_function
+    return await dependant.call(**values)
+                 │         │      └ {'request': ChatRequest(model='claude-3-haiku', content='yo')}
+                 │         └ <function chat at 0x7f6bd960f7f0>
+                 └ <fastapi.dependencies.models.Dependant object at 0x7f6bd94b4190>
+
+> File "/home/teilo/Code/lugia/api/main.py", line 41, in chat
+    response = await model_manager.generate_response(request.model, [asdict(msg) for msg in formatted_messages])
+                     │             │                 │       │       │                      └ [Message(id='d76e0144-4ade-4100-98c3-9df1a53b63ba', role='user', content="Here's are the previous part of a friendly conversa...
+                     │             │                 │       │       └ <function asdict at 0x7f6bdd39bc70>
+                     │             │                 │       └ 'claude-3-haiku'
+                     │             │                 └ ChatRequest(model='claude-3-haiku', content='yo')
+                     │             └ <function ModelManager.generate_response at 0x7f6bd958d870>
+                     └ <core.model.ModelManager object at 0x7f6bd94b6d70>
+
+  File "/home/teilo/Code/lugia/core/model.py", line 35, in generate_response
+    raise e
+
+  File "/home/teilo/Code/lugia/core/model.py", line 30, in generate_response
+    response = await litellm.acompletion(model=model_name, messages=formatted_messages, max_tokens=4096)
+                     │       │                 │                    └ [{'role': 'user', 'content': "Here's are the previous part of a friendly conversation:\n\nuser: yo"}]
+                     │       │                 └ 'claude-3-haiku-20240307'
+                     │       └ <function acompletion at 0x7f6bd9623be0>
+                     └ <module 'litellm' from '/home/teilo/.miniforge3/lib/python3.10/site-packages/litellm/__init__.py'>
+
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/litellm/utils.py", line 3230, in wrapper_async
+    raise e
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/litellm/utils.py", line 3062, in wrapper_async
+    result = await original_function(*args, **kwargs)
+                   │                  │       └ {'model': 'claude-3-haiku-20240307', 'messages': [{'role': 'user', 'content': "Here's are the previous part of a friendly con...
+                   │                  └ ()
+                   └ <function acompletion at 0x7f6bd9620af0>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/litellm/main.py", line 327, in acompletion
+    raise exception_type(
+          └ <function exception_type at 0x7f6bd935ec20>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/litellm/utils.py", line 8257, in exception_type
+    raise e
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/litellm/utils.py", line 7194, in exception_type
+    raise ServiceUnavailableError(
+          └ <class 'litellm.exceptions.ServiceUnavailableError'>
+
+litellm.exceptions.ServiceUnavailableError: AnthropicException - Missing Anthropic API Key - A call is being made to anthropic but no key is set either in the environment variables or via params
+2024-03-26 16:02:27.544 | ERROR    | api.main:chat:47 - Failed to process chat request
+Traceback (most recent call last):
+
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/litellm/main.py", line 1164, in completion
+    response = anthropic.completion(
+               │         └ <function completion at 0x7f6bd9517eb0>
+               └ <module 'litellm.llms.anthropic' from '/home/teilo/.miniforge3/lib/python3.10/site-packages/litellm/llms/anthropic.py'>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/litellm/llms/anthropic.py", line 119, in completion
+    headers = validate_environment(api_key, headers)
+              │                    │        └ None
+              │                    └ None
+              └ <function validate_environment at 0x7f6bd95176d0>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/litellm/llms/anthropic.py", line 90, in validate_environment
+    raise ValueError(
+
+ValueError: Missing Anthropic API Key - A call is being made to anthropic but no key is set either in the environment variables or via params
+
+
+During handling of the above exception, another exception occurred:
+
+
+Traceback (most recent call last):
+
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/litellm/main.py", line 319, in acompletion
+    response = await loop.run_in_executor(None, func_with_context)  # type: ignore
+                     │    │                     └ functools.partial(<built-in method run of _contextvars.Context object at 0x7f6bd95f2c00>, functools.partial(<function complet...
+                     │    └ <method 'run_in_executor' of 'uvloop.loop.Loop' objects>
+                     └ <uvloop.Loop running=True closed=False debug=False>
+  File "/home/teilo/.miniforge3/lib/python3.10/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+             │        │            └ None
+             │        └ None
+             └ None
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/litellm/utils.py", line 2770, in wrapper
+    raise e
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/litellm/utils.py", line 2667, in wrapper
+    result = original_function(*args, **kwargs)
+             │                  │       └ {'model': 'claude-3-haiku-20240307', 'messages': [{'role': 'user', 'content': "Here's are the previous part of a friendly con...
+             │                  └ ()
+             └ <function completion at 0x7f6bd9623d00>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/litellm/main.py", line 2094, in completion
+    raise exception_type(
+          └ <function exception_type at 0x7f6bd935ec20>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/litellm/utils.py", line 8257, in exception_type
+    raise e
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/litellm/utils.py", line 8232, in exception_type
+    raise APIConnectionError(
+          └ <class 'litellm.exceptions.APIConnectionError'>
+
+litellm.exceptions.APIConnectionError: Missing Anthropic API Key - A call is being made to anthropic but no key is set either in the environment variables or via params
+
+
+During handling of the above exception, another exception occurred:
+
+
+Traceback (most recent call last):
+
+  File "<string>", line 1, in <module>
+  File "/home/teilo/.miniforge3/lib/python3.10/multiprocessing/spawn.py", line 116, in spawn_main
+    exitcode = _main(fd, parent_sentinel)
+               │     │   └ 5
+               │     └ 8
+               └ <function _main at 0x7f6bddfaf400>
+  File "/home/teilo/.miniforge3/lib/python3.10/multiprocessing/spawn.py", line 129, in _main
+    return self._bootstrap(parent_sentinel)
+           │    │          └ 5
+           │    └ <function BaseProcess._bootstrap at 0x7f6bde135d80>
+           └ <SpawnProcess name='SpawnProcess-1' parent=18899 started>
+  File "/home/teilo/.miniforge3/lib/python3.10/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+    │    └ <function BaseProcess.run at 0x7f6bde1353f0>
+    └ <SpawnProcess name='SpawnProcess-1' parent=18899 started>
+  File "/home/teilo/.miniforge3/lib/python3.10/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+    │    │        │    │        │    └ {'config': <uvicorn.config.Config object at 0x7f6bddfc7190>, 'target': <bound method Server.run of <uvicorn.server.Server obj...
+    │    │        │    │        └ <SpawnProcess name='SpawnProcess-1' parent=18899 started>
+    │    │        │    └ ()
+    │    │        └ <SpawnProcess name='SpawnProcess-1' parent=18899 started>
+    │    └ <function subprocess_started at 0x7f6bdd5c35b0>
+    └ <SpawnProcess name='SpawnProcess-1' parent=18899 started>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/uvicorn/_subprocess.py", line 78, in subprocess_started
+    target(sockets=sockets)
+    │              └ [<socket.socket fd=4, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8000)>]
+    └ <bound method Server.run of <uvicorn.server.Server object at 0x7f6bddfc71f0>>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/uvicorn/server.py", line 62, in run
+    return asyncio.run(self.serve(sockets=sockets))
+           │       │   │    │             └ [<socket.socket fd=4, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8000)>]
+           │       │   │    └ <function Server.serve at 0x7f6bdd5c2680>
+           │       │   └ <uvicorn.server.Server object at 0x7f6bddfc71f0>
+           │       └ <function run at 0x7f6bdd77b1c0>
+           └ <module 'asyncio' from '/home/teilo/.miniforge3/lib/python3.10/asyncio/__init__.py'>
+  File "/home/teilo/.miniforge3/lib/python3.10/asyncio/runners.py", line 44, in run
+    return loop.run_until_complete(main)
+           │    │                  └ <coroutine object Server.serve at 0x7f6bdd28dd20>
+           │    └ <method 'run_until_complete' of 'uvloop.loop.Loop' objects>
+           └ <uvloop.Loop running=True closed=False debug=False>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/uvicorn/protocols/http/httptools_impl.py", line 412, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+                   └ <uvicorn.middleware.proxy_headers.ProxyHeadersMiddleware object at 0x7f6bdd2a2c80>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/uvicorn/middleware/proxy_headers.py", line 69, in __call__
+    return await self.app(scope, receive, send)
+                 │    │   │      │        └ <bound method RequestResponseCycle.send of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7f6bd96492...
+                 │    │   │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7f6bd96...
+                 │    │   └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.4'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+                 │    └ <fastapi.applications.FastAPI object at 0x7f6bd94b5420>
+                 └ <uvicorn.middleware.proxy_headers.ProxyHeadersMiddleware object at 0x7f6bdd2a2c80>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+                           │      │        └ <bound method RequestResponseCycle.send of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7f6bd96492...
+                           │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7f6bd96...
+                           └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.4'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/starlette/applications.py", line 123, in __call__
+    await self.middleware_stack(scope, receive, send)
+          │    │                │      │        └ <bound method RequestResponseCycle.send of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7f6bd96492...
+          │    │                │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7f6bd96...
+          │    │                └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.4'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          │    └ <starlette.middleware.errors.ServerErrorMiddleware object at 0x7f6bd94b56f0>
+          └ <fastapi.applications.FastAPI object at 0x7f6bd94b5420>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/starlette/middleware/errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+          │    │   │      │        └ <function ServerErrorMiddleware.__call__.<locals>._send at 0x7f6bd960f910>
+          │    │   │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7f6bd96...
+          │    │   └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.4'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          │    └ <starlette.middleware.cors.CORSMiddleware object at 0x7f6bd94b58d0>
+          └ <starlette.middleware.errors.ServerErrorMiddleware object at 0x7f6bd94b56f0>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/starlette/middleware/cors.py", line 91, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+          │    │               │      │        │                     └ Headers({'host': '127.0.0.1:8000', 'connection': 'keep-alive', 'content-length': '41', 'sec-ch-ua': '"Brave";v="123", "Not:A-...
+          │    │               │      │        └ <function ServerErrorMiddleware.__call__.<locals>._send at 0x7f6bd960f910>
+          │    │               │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7f6bd96...
+          │    │               └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.4'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          │    └ <function CORSMiddleware.simple_response at 0x7f6bd958dd80>
+          └ <starlette.middleware.cors.CORSMiddleware object at 0x7f6bd94b58d0>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/starlette/middleware/cors.py", line 146, in simple_response
+    await self.app(scope, receive, send)
+          │    │   │      │        └ functools.partial(<bound method CORSMiddleware.send of <starlette.middleware.cors.CORSMiddleware object at 0x7f6bd94b58d0>>, ...
+          │    │   │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7f6bd96...
+          │    │   └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.4'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          │    └ <starlette.middleware.exceptions.ExceptionMiddleware object at 0x7f6bd94b56c0>
+          └ <starlette.middleware.cors.CORSMiddleware object at 0x7f6bd94b58d0>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/starlette/middleware/exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+          │                            │    │    │     │      │        └ functools.partial(<bound method CORSMiddleware.send of <starlette.middleware.cors.CORSMiddleware object at 0x7f6bd94b58d0>>, ...
+          │                            │    │    │     │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7f6bd96...
+          │                            │    │    │     └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.4'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          │                            │    │    └ <starlette.requests.Request object at 0x7f6bd9649fc0>
+          │                            │    └ <fastapi.routing.APIRouter object at 0x7f6bd94b5210>
+          │                            └ <starlette.middleware.exceptions.ExceptionMiddleware object at 0x7f6bd94b56c0>
+          └ <function wrap_app_handling_exceptions at 0x7f6bdc073b50>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    await app(scope, receive, sender)
+          │   │      │        └ <function wrap_app_handling_exceptions.<locals>.wrapped_app.<locals>.sender at 0x7f6bd960fac0>
+          │   │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7f6bd96...
+          │   └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.4'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          └ <fastapi.routing.APIRouter object at 0x7f6bd94b5210>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/starlette/routing.py", line 758, in __call__
+    await self.middleware_stack(scope, receive, send)
+          │    │                │      │        └ <function wrap_app_handling_exceptions.<locals>.wrapped_app.<locals>.sender at 0x7f6bd960fac0>
+          │    │                │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7f6bd96...
+          │    │                └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.4'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          │    └ <bound method Router.app of <fastapi.routing.APIRouter object at 0x7f6bd94b5210>>
+          └ <fastapi.routing.APIRouter object at 0x7f6bd94b5210>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/starlette/routing.py", line 778, in app
+    await route.handle(scope, receive, send)
+          │     │      │      │        └ <function wrap_app_handling_exceptions.<locals>.wrapped_app.<locals>.sender at 0x7f6bd960fac0>
+          │     │      │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7f6bd96...
+          │     │      └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.4'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          │     └ <function Route.handle at 0x7f6bdc005000>
+          └ APIRoute(path='/chat/', name='chat', methods=['POST'])
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/starlette/routing.py", line 299, in handle
+    await self.app(scope, receive, send)
+          │    │   │      │        └ <function wrap_app_handling_exceptions.<locals>.wrapped_app.<locals>.sender at 0x7f6bd960fac0>
+          │    │   │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7f6bd96...
+          │    │   └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.4'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          │    └ <function request_response.<locals>.app at 0x7f6bd958e4d0>
+          └ APIRoute(path='/chat/', name='chat', methods=['POST'])
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/starlette/routing.py", line 79, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+          │                            │    │        │      │        └ <function wrap_app_handling_exceptions.<locals>.wrapped_app.<locals>.sender at 0x7f6bd960fac0>
+          │                            │    │        │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7f6bd96...
+          │                            │    │        └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.4'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          │                            │    └ <starlette.requests.Request object at 0x7f6bd9648310>
+          │                            └ <function request_response.<locals>.app.<locals>.app at 0x7f6bd960fe20>
+          └ <function wrap_app_handling_exceptions at 0x7f6bdc073b50>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    await app(scope, receive, sender)
+          │   │      │        └ <function wrap_app_handling_exceptions.<locals>.wrapped_app.<locals>.sender at 0x7f6bd960fd00>
+          │   │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7f6bd96...
+          │   └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.4'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          └ <function request_response.<locals>.app.<locals>.app at 0x7f6bd960fe20>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/starlette/routing.py", line 74, in app
+    response = await func(request)
+                     │    └ <starlette.requests.Request object at 0x7f6bd9648310>
+                     └ <function get_request_handler.<locals>.app at 0x7f6bd958e440>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/fastapi/routing.py", line 278, in app
+    raw_response = await run_endpoint_function(
+                         └ <function run_endpoint_function at 0x7f6bdc005ea0>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/fastapi/routing.py", line 191, in run_endpoint_function
+    return await dependant.call(**values)
+                 │         │      └ {'request': ChatRequest(model='claude-3-haiku', content='yo')}
+                 │         └ <function chat at 0x7f6bd960f7f0>
+                 └ <fastapi.dependencies.models.Dependant object at 0x7f6bd94b4190>
+
+> File "/home/teilo/Code/lugia/api/main.py", line 41, in chat
+    response = await model_manager.generate_response(request.model, [asdict(msg) for msg in formatted_messages])
+                     │             │                 │       │       │                      └ [Message(id='d76e0144-4ade-4100-98c3-9df1a53b63ba', role='user', content="Here's are the previous part of a friendly conversa...
+                     │             │                 │       │       └ <function asdict at 0x7f6bdd39bc70>
+                     │             │                 │       └ 'claude-3-haiku'
+                     │             │                 └ ChatRequest(model='claude-3-haiku', content='yo')
+                     │             └ <function ModelManager.generate_response at 0x7f6bd958d870>
+                     └ <core.model.ModelManager object at 0x7f6bd94b6d70>
+
+  File "/home/teilo/Code/lugia/core/model.py", line 35, in generate_response
+    raise e
+
+  File "/home/teilo/Code/lugia/core/model.py", line 30, in generate_response
+    response = await litellm.acompletion(model=model_name, messages=formatted_messages, max_tokens=4096)
+                     │       │                 │                    └ [{'role': 'user', 'content': "Here's are the previous part of a friendly conversation:\n\nuser: yo"}]
+                     │       │                 └ 'claude-3-haiku-20240307'
+                     │       └ <function acompletion at 0x7f6bd9623be0>
+                     └ <module 'litellm' from '/home/teilo/.miniforge3/lib/python3.10/site-packages/litellm/__init__.py'>
+
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/litellm/utils.py", line 3230, in wrapper_async
+    raise e
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/litellm/utils.py", line 3062, in wrapper_async
+    result = await original_function(*args, **kwargs)
+                   │                  │       └ {'model': 'claude-3-haiku-20240307', 'messages': [{'role': 'user', 'content': "Here's are the previous part of a friendly con...
+                   │                  └ ()
+                   └ <function acompletion at 0x7f6bd9620af0>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/litellm/main.py", line 327, in acompletion
+    raise exception_type(
+          └ <function exception_type at 0x7f6bd935ec20>
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/litellm/utils.py", line 8257, in exception_type
+    raise e
+  File "/home/teilo/.miniforge3/lib/python3.10/site-packages/litellm/utils.py", line 7194, in exception_type
+    raise ServiceUnavailableError(
+          └ <class 'litellm.exceptions.ServiceUnavailableError'>
+
+litellm.exceptions.ServiceUnavailableError: AnthropicException - Missing Anthropic API Key - A call is being made to anthropic but no key is set either in the environment variables or via params
