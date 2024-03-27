@@ -8,14 +8,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github.min.css">
 </head>
 <body>
-    <div id="chat-container">
+    <header>
         <div id="model-selector">
-            <button id="theme-switcher" aria-label="Switch Theme">
-                <i class="fas fa-sun"></i>
-                <i class="fas fa-moon"></i>
-            </button>
             <label for="model-dropdown">Choose a model:</label>
-            <select id="model-dropdown">
+            <select id="model-dropdown" aria-label="Select a model">
                 <option value="claude-3-haiku">Claude-3 Haiku</option>
                 <option value="claude-3-opus">Claude-3 Opus</option>
                 <option value="claude-3-sonnet">Claude-3 Sonnet</option>
@@ -23,47 +19,54 @@
                 <option value="gpt-4">GPT-4</option>
                 <option value="gpt-3.5">GPT-3.5</option>
             </select>
+            <button id="theme-switcher" aria-label="Switch Theme">
+                <i class="fas fa-sun"></i>
+                <i class="fas fa-moon"></i>
+            </button>
         </div>
-        <div id="conversation-history">
-            <div id="conversation-bubbles"></div>
-            <div id="conversation-timeline"></div>
-        </div>
-        <div id="conversation-manager">
-            <h3>Conversations</h3>
-            <input type="text" id="conversation-search" placeholder="Search conversations..." aria-label="Search conversations">
-            <ul id="conversation-list"></ul>
-            <div class="manager-actions">
-                <button id="new-conversation-btn">New Conversation</button>
-                <button id="load-more-btn">Load More</button>
-                <div class="dropdown">
-                    <button class="dropdown-btn">Export</button>
-                    <div class="dropdown-content">
-                        <a href="#" id="export-plain-text">Export as Plain Text</a>
-                        <a href="#" id="export-html">Export as HTML</a>
-                        <a href="#" id="export-markdown">Export as Markdown</a>
-                        <a href="#" id="export-pdf">Export as PDF</a>
+    </header>
+    <main id="chat-container">
+        <button id="toggle-conversation-manager">Toggle Conversation Manager</button>
+        <div id="conversation-manager-container" class="hidden">
+            <section id="conversation-manager">
+                <h2>Conversations</h2>
+                <input type="text" id="conversation-search" placeholder="Search conversations..." aria-label="Search conversations">
+                <ul id="conversation-list"></ul>
+                <div class="manager-actions">
+                    <button id="new-conversation-btn">New Conversation</button>
+                    <button id="load-more-btn">Load More</button>
+                    <div class="dropdown">
+                        <button class="dropdown-btn">Export</button>
+                        <div class="dropdown-content">
+                            <a href="#" id="export-plain-text">Export as Plain Text</a>
+                            <a href="#" id="export-html">Export as HTML</a>
+                            <a href="#" id="export-markdown">Export as Markdown</a>
+                            <a href="#" id="export-pdf">Export as PDF</a>
+                        </div>
+                    </div>
+                    <div class="dropdown">
+                        <button class="dropdown-btn">Share</button>
+                        <div class="dropdown-content">
+                            <a href="#" id="share-link">Copy Shareable Link</a>
+                            <a href="#" id="share-social">Share on Social Media</a>
+                            <a href="#" id="share-embed">Embed Conversation</a>
+                        </div>
                     </div>
                 </div>
-                <div class="dropdown">
-                    <button class="dropdown-btn">Share</button>
-                    <div class="dropdown-content">
-                        <a href="#" id="share-link">Copy Shareable Link</a>
-                        <a href="#" id="share-social">Share on Social Media</a>
-                        <a href="#" id="share-embed">Embed Conversation</a>
-                    </div>
-                </div>
-            </div>
+            </section>
         </div>
-        <div id="chat-area">
+        <section id="chat-area">
             <div id="conversation-header"></div>
-            <div id="conversation-loading" class="loading-animation"></div>
-            <div id="conversation-placeholder"></div>
+            <div id="conversation-history">
+                <div id="conversation-loading" class="loading-animation"></div>
+                <div id="conversation-placeholder"></div>
+            </div>
             <div id="input-container">
                 <textarea id="user-input" placeholder="Type your message..." rows="1" aria-label="Type your message"></textarea>
                 <button id="send-btn">Send</button>
             </div>
-        </div>
-    </div>
+        </section>
+    </main>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
     <script src="https://kit.fontawesome.com/your-font-awesome-kit.js" crossorigin="anonymous"></script>

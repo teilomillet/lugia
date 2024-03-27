@@ -6,12 +6,21 @@ const conversationPlaceholder = document.getElementById('conversation-placeholde
 const conversationHeader = document.getElementById('conversation-header');
 const conversationList = document.getElementById('conversation-list');
 
+
 sendBtn.addEventListener('click', sendMessage);
 document.addEventListener('input', adjustTextareaHeight, false);
 document.addEventListener('DOMContentLoaded', initThemeSwitcher);
 document.getElementById('conversation-search').addEventListener('input', searchConversations);
 document.getElementById('load-more-btn').addEventListener('click', loadMoreConversations);
 document.getElementById('new-conversation-btn').addEventListener('click', createNewConversation);
+
+const toggleConversationManager = document.getElementById('toggle-conversation-manager');
+const conversationManagerContainer = document.getElementById('conversation-manager-container');
+
+toggleConversationManager.addEventListener('click', () => {
+    conversationManagerContainer.classList.toggle('hidden');
+});
+
 
 async function sendMessage() {
     const userText = userInput.value.trim();
