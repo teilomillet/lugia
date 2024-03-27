@@ -146,20 +146,107 @@ body, html {
 
 .conversation-list li {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    padding: 10px;
-    cursor: pointer;
-    transition: background-color 0.3s;
+    padding: 15px 20px;
+    border-bottom: 1px solid #eee;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    position: relative;
+}
+
+.conversation-list li:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background-color: transparent;
+    transition: background-color 0.3s ease;
 }
 
 .conversation-list li:hover {
     background-color: #f5f5f5;
+    transform: translateX(5px);
+}
+
+.conversation-list li:hover:before {
+    background-color: var(--primary-color);
 }
 
 .conversation-list li.selected {
     background-color: #e0e0e0;
     font-weight: bold;
+}
+
+.conversation-list li.selected:before {
+    background-color: var(--primary-color);
+}
+
+.conversation-list li .conversation-info {
+    flex-grow: 1;
+}
+
+.conversation-list li .conversation-name {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.conversation-list li .conversation-preview {
+    font-size: 14px;
+    color: #777;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.conversation-list li .conversation-timestamp {
+    font-size: 12px;
+    color: #999;
+    white-space: nowrap;
+}
+
+button {
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+button:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.4);
+}
+
+/* Use CSS variables for colors and font sizes */
+:root {
+    --primary-color: #007bff;
+    --secondary-color: #6c757d;
+    --background-color: #f9f9f9;
+    --text-color: #333;
+    --font-size-base: 16px;
+    --font-size-small: 14px;
+}
+
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    font-size: var(--font-size-base);
+}
+
+/* Add smooth transitions when switching between conversations or themes */
+#conversation-placeholder {
+    transition: opacity 0.3s ease;
+}
+
+#conversation-placeholder.loading {
+    opacity: 0.6;
+}
+
+body.night-mode {
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .loading-animation {
