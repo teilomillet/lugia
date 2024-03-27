@@ -1,4 +1,4 @@
-# conversation.py
+# lugia/core/conversation.py
 from dataclasses import dataclass, asdict
 from datetime import datetime
 import uuid

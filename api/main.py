@@ -1,4 +1,4 @@
-# main.py
+# lugia/api/main.py
 from fastapi import FastAPI, HTTPException, Query
 from core.model import ModelManager
 from dataclasses import asdict

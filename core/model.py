@@ -1,4 +1,4 @@
-# model.py
+# lugia/core/model.py
 from config import Config
 import litellm
 from loguru import logger
