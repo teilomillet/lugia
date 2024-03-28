@@ -19,7 +19,7 @@
                 <option value="gpt-4">GPT-4</option>
                 <option value="gpt-3.5">GPT-3.5</option>
             </select>
-            <button id="theme-switcher" aria-label="Switch Theme">
+            <button id="theme-switcher" aria-label="Switch Theme" class="theme-switcher">
                 <i class="fas fa-sun"></i>
                 <i class="fas fa-moon"></i>
             </button>
@@ -27,24 +27,28 @@
     </header>
     <main id="chat-container">
         <div class="manager-actions">
-            <button id="toggle-conversation-manager">Toggle Conversation Manager</button>
-            <button id="new-conversation-btn">New Conversation</button>
-            <button id="load-more-btn">Load More</button>
-            <div class="dropdown">
-                <button class="dropdown-btn">Export</button>
-                <div class="dropdown-content">
-                    <a href="#" id="export-plain-text">Export as Plain Text</a>
-                    <a href="#" id="export-html">Export as HTML</a>
-                    <a href="#" id="export-markdown">Export as Markdown</a>
-                    <a href="#" id="export-pdf">Export as PDF</a>
-                </div>
+            <div class="action-buttons">
+                <button id="toggle-conversation-manager"><i class="fas fa-bars"></i> Conversation Manager</button>
             </div>
-            <div class="dropdown">
-                <button class="dropdown-btn">Share</button>
-                <div class="dropdown-content">
-                    <a href="#" id="share-link">Copy Shareable Link</a>
-                    <a href="#" id="share-social">Share on Social Media</a>
-                    <a href="#" id="share-embed">Embed Conversation</a>
+            <div class="action-buttons">
+                <button id="new-conversation-btn"><i class="fas fa-plus"></i> New Conversation</button>
+                <button id="load-more-btn"><i class="fas fa-arrow-down"></i> Load More</button>
+                <div class="dropdown">
+                    <button class="dropdown-btn"><i class="fas fa-share"></i> Export</button>
+                    <div class="dropdown-content">
+                        <a href="#" id="export-plain-text">Export as Plain Text</a>
+                        <a href="#" id="export-html">Export as HTML</a>
+                        <a href="#" id="export-markdown">Export as Markdown</a>
+                        <a href="#" id="export-pdf">Export as PDF</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <button class="dropdown-btn"><i class="fas fa-share-alt"></i> Share</button>
+                    <div class="dropdown-content">
+                        <a href="#" id="share-link">Copy Shareable Link</a>
+                        <a href="#" id="share-social">Share on Social Media</a>
+                        <a href="#" id="share-embed">Embed Conversation</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -59,7 +63,10 @@
             <section id="chat-area">
                 <div id="conversation-header"></div>
                 <div id="conversation-history">
-                    <div id="conversation-loading" class="loading-animation"></div>
+                    <div id="conversation-loading" class="loading-animation">
+                        <div class="spinner"></div>
+                        <p>Loading...</p>
+                    </div>
                     <div id="conversation-placeholder"></div>
                 </div>
                 <div id="input-container">
@@ -68,7 +75,6 @@
                 </div>
             </section>
         </div>
-        
     </main>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>

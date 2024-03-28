@@ -18,6 +18,7 @@ const toggleButton = document.getElementById('toggle-conversation-manager');
 const conversationManagerContainer = document.getElementById('conversation-manager-container');
 const chatArea = document.getElementById('chat-area');
 
+
 toggleButton.addEventListener('click', () => {
     conversationManagerContainer.classList.toggle('collapsed');
     if (conversationManagerContainer.classList.contains('collapsed')) {
