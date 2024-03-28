@@ -14,11 +14,17 @@ document.getElementById('conversation-search').addEventListener('input', searchC
 document.getElementById('load-more-btn').addEventListener('click', loadMoreConversations);
 document.getElementById('new-conversation-btn').addEventListener('click', createNewConversation);
 
-const toggleConversationManager = document.getElementById('toggle-conversation-manager');
+const toggleButton = document.getElementById('toggle-conversation-manager');
 const conversationManagerContainer = document.getElementById('conversation-manager-container');
+const chatArea = document.getElementById('chat-area');
 
-toggleConversationManager.addEventListener('click', () => {
-    conversationManagerContainer.classList.toggle('hidden');
+toggleButton.addEventListener('click', () => {
+    conversationManagerContainer.classList.toggle('collapsed');
+    if (conversationManagerContainer.classList.contains('collapsed')) {
+        chatArea.style.width = '100%';
+    } else {
+        chatArea.style.width = 'calc(100% - 300px)';
+    }
 });
 
 
