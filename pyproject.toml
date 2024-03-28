@@ -19,6 +19,7 @@ fastapi = "^0.110.0"
 uvicorn = "^0.28.0"
 aiofiles = "^23.2.1"
 tiktoken = "^0.6.0"
+llama-index = "^0.10.25"
 
 [tool.poetry.group.dev.dependencies]
 litellm = "^1.31.13"
