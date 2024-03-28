@@ -47,7 +47,7 @@ body, html {
 
 #main-content {
     display: flex;
-    height: calc(100% - 50px); /* Adjust the height to accommodate the manager actions */
+    height: calc(100% - 50px);
 }
 
 #conversation-manager-container {
@@ -150,28 +150,40 @@ body, html {
     flex-direction: column;
     padding: 20px;
     position: relative;
+    width: calc(100% - 320px);
+    transition: width 0.3s ease;
+    box-sizing: border-box;
+    height: auto; /* Change from fixed height to auto */
+    max-height: 90vh; /* Set the maximum height to 70% of the viewport height */
+    transition: max-height 0.3s ease; /* Add transition for max-height */
+}
+
+#conversation-history {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding-right: 20px;
+    box-sizing: border-box;
+    max-height: calc(100vh - 300px); /* Set the max-height of the conversation history to the remaining space */
+    transition: max-height 0.3s ease; /* Add transition for max-height */
 }
 
 #input-container {
-    position: absolute;
-    bottom: 20px;
-    right: 20px;
-    width: 400px;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: var(--border-radius);
-    background-color: #fff;
+    display: flex;
+    flex-grow: 1;
+    align-items: center;
+    gap: 10px;
 }
 
 #user-input {
     flex-grow: 1;
+    max-height: 300px; /* Set the maximum height to 300px */
+    overflow-y: auto;
     padding: 12px;
     border: 1px solid #ccc;
-    border-radius: var(--border-radius);
-    font-size: var(--font-size-base);
-    overflow-y: auto;
+    border-radius: 5px;
+    margin-right: 20px;
+    font-size: 15px;
     resize: none;
-    max-height: 500px;
 }
 
 #send-btn {

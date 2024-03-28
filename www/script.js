@@ -28,6 +28,7 @@ toggleButton.addEventListener('click', () => {
 });
 
 
+
 async function sendMessage() {
     const userText = userInput.value.trim();
     const selectedModel = modelDropdown.value;
