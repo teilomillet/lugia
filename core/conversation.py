@@ -122,12 +122,36 @@ class ConversationService:
         return truncated_history
 
     def _prepare_messages_for_model(self, model_name: str, token_limit: int) -> List[Message]:
+        # Prepare the conversation history for sending to the model
         truncated_history = self.truncate_conversation_history(model_name, token_limit)
 
-        formatted_content = "Here's are the previous part of a friendly conversation:\n\n"
-        for msg in truncated_history:
-            prefix = f"{msg.role}: "
-            formatted_content += prefix + msg.content + "\n\n"
-        formatted_content += "\n"
+        system_message = Message(
+            id=str(uuid.uuid4()),
+            role="system",
+            content="You are a Senior Engineer at Google.",
+            timestamp=datetime.utcnow().isoformat() + 'Z'
+        )
 
-        return [Message(id=str(uuid.uuid4()), role="user", content=formatted_content.strip(), timestamp=datetime.utcnow().isoformat() + 'Z')]
+        user_message_content = "<conversation>\n"
+        for msg in truncated_history:
+            if msg.role == "user":
+                user_message_content += f"<user>{msg.content}</user>\n"
+            elif msg.role == "assistant":
+                user_message_content += f"<engineer>{msg.content}</engineer>\n"
+        user_message_content += "</conversation>\n"
+
+        user_message_content += "\n<instructions>\nBased on the conversation history. Consider the following:\n"
+        user_message_content += "<plan>\n"
+        user_message_content += "- Think step by step on the situation and how to improve it\n"
+        user_message_content += "- Provide relevant information/examples or solutions\n"
+        user_message_content += "</plan>\n"
+        user_message_content += "<response></response>\n</instructions>"
+
+        user_message = Message(
+            id=str(uuid.uuid4()),
+            role="user",
+            content=user_message_content.strip(),
+            timestamp=datetime.utcnow().isoformat() + 'Z'
+        )
+
+        return [system_message, user_message]

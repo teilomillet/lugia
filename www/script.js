@@ -60,12 +60,25 @@ function displayMessage(text, sender) {
 
     segments.forEach((segment, index) => {
         if (index % 2 === 0) {
-            if (segment.trim().length > 0) {
-                const textElement = document.createElement('div');
-                textElement.innerHTML = segment.replace(/\n/g, '<br>');
-                messageElement.appendChild(textElement);
-            }
+            // Regular text
+            const lines = segment.split('\n');
+            let lineContent = '';
+
+            lines.forEach((line, lineIndex) => {
+                const indentLevel = (line.match(/^(\s*)/)[1] || '').length / 4;
+                lineContent += `<span style="margin-left: ${indentLevel * 15}px;">${line.trim()}</span>`;
+
+                if (lineIndex < lines.length - 1) {
+                    lineContent += '<br>';
+                }
+            });
+
+            const lineElement = document.createElement('div');
+            lineElement.classList.add('message-line');
+            lineElement.innerHTML = lineContent;
+            messageElement.appendChild(lineElement);
         } else {
+            // Code block
             const preElement = document.createElement('pre');
             const codeElement = document.createElement('code');
             codeElement.textContent = segment;
@@ -78,6 +91,7 @@ function displayMessage(text, sender) {
     conversationPlaceholder.appendChild(messageElement);
     conversationPlaceholder.scrollTop = conversationPlaceholder.scrollHeight;
 }
+    
 
 function adjustTextareaHeight(event) {
     if (event.target.id === 'user-input') {
