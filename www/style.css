@@ -228,7 +228,7 @@ body, html {
     transition: width var(--transition-duration);
     box-sizing: border-box;
     height: auto;
-    max-height: 90vh;
+    /* max-height: 90vh; */
     transition: max-height var(--transition-duration);
     border-left: 1px solid #ccc;
     padding-left: 30px;
@@ -244,7 +244,7 @@ body, html {
     overflow-y: auto;
     padding-right: 20px;
     box-sizing: border-box;
-    max-height: calc(100vh - 300px);
+    max-height: auto;
     transition: max-height var(--transition-duration);
 }
 
