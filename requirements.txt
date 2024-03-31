@@ -8,7 +8,7 @@ async-timeout==4.0.3 ; python_version >= "3.10" and python_version < "3.11"
 attrs==23.2.0 ; python_version >= "3.10" and python_version < "4.0"
 beautifulsoup4==4.12.3 ; python_version >= "3.10" and python_version < "4.0"
 bs4==0.0.2 ; python_version >= "3.10" and python_version < "4.0"
-cachetools==5.3.3
+cachetools==5.3.3 ; python_version >= "3.10" and python_version < "4.0"
 certifi==2024.2.2 ; python_version >= "3.10" and python_version < "4.0"
 charset-normalizer==3.3.2 ; python_version >= "3.10" and python_version < "4.0"
 click==8.1.7 ; python_version >= "3.10" and python_version < "4.0"
