@@ -173,15 +173,19 @@ async function loadConversation(conversationFile) {
 }
 
 async function createNewConversation() {
-    await fetch('http://127.0.0.1:8000/conversations/new/', { method: 'POST' });
+    const response = await fetch('http://127.0.0.1:8000/conversations/new/', { method: 'POST' });
+    const data = await response.json();
+    const conversationFile = data.conversation_file;
+    
     await loadConversations();
 
-    const newConversationItem = conversationList.lastElementChild;
+    const newConversationItem = conversationList.querySelector(`[data-conversation="${conversationFile}"]`);
     newConversationItem.classList.add('new-conversation');
     setTimeout(() => {
         newConversationItem.classList.remove('new-conversation');
     }, 3000);
 }
+
 
 async function loadConversations() {
     const conversations = await listConversations();
@@ -190,28 +194,20 @@ async function loadConversations() {
     conversations.forEach(conversation => {
         const listItem = document.createElement('li');
         listItem.textContent = conversation;
+        listItem.setAttribute('data-conversation', conversation);
         listItem.addEventListener('click', () => switchConversation(conversation));
         conversationList.appendChild(listItem);
     });
 }
 
-async function loadChat(conversationFile) {
-    try {
-        const response = await fetch(`http://127.0.0.1:8000/conversations/history/?conversation_file=${conversationFile}`);
-        const data = await response.json();
-        const messages = data.messages;
-
-        chatBox.innerHTML = '';
-
-        messages.forEach(message => {
-            const sender = message.role === 'user' ? 'user' : 'bot';
-            displayMessage(message.content, sender);
-        });
-
-        chatBox.scrollTop = chatBox.scrollHeight;
-    } catch (error) {
-        console.error('Error:', error);
+async function loadChat() {
+    const selectedConversation = getSelectedConversation();
+    if (selectedConversation) {
+        await switchConversation(selectedConversation);
+    } else {
+        await createNewConversation();
     }
 }
 
 loadConversations();
+loadChat();
