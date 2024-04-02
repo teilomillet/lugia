@@ -5,7 +5,6 @@ from loguru import logger
 
 logger.add(Config.LOG_FILE, rotation="10 MB", compression="zip")
 
-# Initialize API keys
 litellm.openai_key = Config.OPENAI_API_KEY
 litellm.anthropic_key = Config.ANTHROPIC_API_KEY
 
@@ -28,8 +27,8 @@ class ModelManager:
         try:
             formatted_messages = [{"role": msg["role"], "content": msg["content"]} for msg in messages]
             response = await litellm.acompletion(model=model_name, messages=formatted_messages, max_tokens=4096)
-            print("Response:", response)  # Print response for debugging
-            return response.choices[0].message.content  # Assuming response structure
+            print("Response:", response)
+            return response.choices[0].message.content
         except Exception as e:
             logger.exception("Error during model response generation")
             raise e
