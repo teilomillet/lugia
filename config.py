@@ -14,3 +14,4 @@ class Config:
     LOG_FILE = "liteLLM_log.log"
     TOKEN_LIMIT = 8182
     CACHE_SIZE = 10000
+    SYSTEM_PROMPT = "You are a Senior Engineer at Google."

@@ -25,6 +25,7 @@ class ConversationService:
         self.s3_client = self.init_s3_client()
         self.conversation_cache = LRUCache(maxsize=Config.CACHE_SIZE)
         self.active_conversation = None
+        self.system_prompt = self.load_system_prompt()
 
     def init_s3_client(self):
         try:
@@ -39,6 +40,14 @@ class ConversationService:
         except ClientError as e:
             logger.error(f"Failed to initialize S3 client: {e}")
             raise
+
+    def load_system_prompt(self) -> str:
+        try:
+            with open("system_prompt.txt", "r") as file:
+                return file.read().strip()
+        except FileNotFoundError:
+            logger.warning("System prompt file not found. Using default prompt.")
+            return "You are a Senior Engineer at a major Big Corp."
 
     def count_tokens(self, text: str) -> int:
         encoding = tiktoken.encoding_for_model("gpt-4")
@@ -121,7 +130,7 @@ class ConversationService:
         cached_history = self.conversation_cache[conversation_file]
 
         truncated_history = []
-        token_count = 0
+        token_count = self.count_tokens(self.system_prompt)
 
         for message in reversed(cached_history):
             message_tokens = self.count_tokens(message.content)
@@ -139,7 +148,7 @@ class ConversationService:
         system_message = Message(
             id=str(uuid.uuid4()),
             role="system",
-            content="You are a Senior Engineer at Google.",
+            content=self.system_prompt,
             timestamp=datetime.utcnow().isoformat() + 'Z'
         )
 
