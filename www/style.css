@@ -1,32 +1,41 @@
 :root {
+    /* Color Scheme */
     --primary-color: #007bff;
     --secondary-color: #6c757d;
     --background-color: #f9f9f9;
     --text-color: #333;
+    /* Font Sizing */
     --font-size-base: 16px;
     --font-size-small: 14px;
+    /* UI Components */
     --border-radius: 8px;
-    --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    --transition-duration: 0.3s;
-}
-
-.night-mode {
-    --background-color: #2c3e50;
-    --text-color: #ecf0f1;
-    --primary-color: #16a085;
-    --secondary-color: #7f8c8d;
-    --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    --box-shadow-base: 0 2px 4px rgba(0, 0, 0, 0.1);
+    --transition-base: 0.3s;
+    /* Night Mode Overrides */
+    --night-background-color: #2c3e50;
+    --night-text-color: #ecf0f1;
+    --night-primary-color: #16a085;
+    --night-secondary-color: #7f8c8d;
+    --night-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 body, html {
-    height: auto;
     margin: 0;
     padding: 0;
     font-family: 'Roboto', Arial, sans-serif;
     background-color: var(--background-color);
     color: var(--text-color);
     font-size: var(--font-size-base);
-    transition: background-color var(--transition-duration), color var(--transition-duration);
+    transition: background-color var(--transition-base), color var(--transition-base);
+}
+
+/* Example of optimized section for night mode */
+.night-mode {
+    --background-color: var(--night-background-color);
+    --text-color: var(--night-text-color);
+    --primary-color: var(--night-primary-color);
+    --secondary-color: var(--night-secondary-color);
+    --box-shadow: var(--night-box-shadow);
 }
 
 #chat-container {
@@ -217,6 +226,18 @@ body, html {
     border-color: #ecf0f1;
     background-color: #34495e;
     color: #ecf0f1;
+}
+
+.delete-conversation-btn {
+    background: none;
+    border: none;
+    color: #888;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.delete-conversation-btn:hover {
+    color: #f00;
 }
 
 #chat-area {

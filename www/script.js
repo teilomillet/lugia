@@ -5,19 +5,21 @@ const modelDropdown = document.getElementById('model-dropdown');
 const conversationPlaceholder = document.getElementById('conversation-placeholder');
 const conversationHeader = document.getElementById('conversation-header');
 const conversationList = document.getElementById('conversation-list');
-
+const BASE_URL = 'http://127.0.0.1:8000';
 
 sendBtn.addEventListener('click', sendMessage);
 document.addEventListener('input', adjustTextareaHeight, false);
 document.addEventListener('DOMContentLoaded', initThemeSwitcher);
-document.getElementById('conversation-search').addEventListener('input', searchConversations);
+document.getElementById('conversation-search').addEventListener('input', debounce(searchConversations, 300));
 document.getElementById('load-more-btn').addEventListener('click', loadMoreConversations);
 document.getElementById('new-conversation-btn').addEventListener('click', createNewConversation);
+document.getElementById('clear-conversation-btn').addEventListener('click', clearConversation);
 
 const toggleButton = document.getElementById('toggle-conversation-manager');
 const conversationManagerContainer = document.getElementById('conversation-manager-container');
 const chatArea = document.getElementById('chat-area');
-
+const loadingSpinner = document.getElementById('loading-spinner');
+const errorMessage = document.getElementById('error-message');
 
 toggleButton.addEventListener('click', () => {
     conversationManagerContainer.classList.toggle('collapsed');
@@ -28,8 +30,6 @@ toggleButton.addEventListener('click', () => {
     }
 });
 
-
-
 async function sendMessage() {
     const userText = userInput.value.trim();
     const selectedModel = modelDropdown.value;
@@ -37,18 +37,30 @@ async function sendMessage() {
 
     displayMessage(userText, 'user');
     userInput.value = '';
-    userInput.style.height = 'auto'; // Reset the height of the text input
+    userInput.style.height = 'auto';
+
+    loadingSpinner.style.display = 'block';
+    errorMessage.style.display = 'none';
 
     try {
-        const response = await fetch('http://127.0.0.1:8000/chat/', {
+        const response = await fetch(`${BASE_URL}/chat/`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ model: selectedModel, content: userText }),
         });
+
+        if (!response.ok) {
+            throw new Error('Request failed');
+        }
+
         const data = await response.json();
         displayMessage(data.response, 'bot');
     } catch (error) {
         console.error('Error:', error);
+        errorMessage.textContent = 'An error occurred. Please try again.';
+        errorMessage.style.display = 'block';
+    } finally {
+        loadingSpinner.style.display = 'none';
     }
 }
 
@@ -60,25 +72,23 @@ function displayMessage(text, sender) {
 
     segments.forEach((segment, index) => {
         if (index % 2 === 0) {
-            // Regular text
             const lines = segment.split('\n');
-            let lineContent = '';
-
-            lines.forEach((line, lineIndex) => {
-                const indentLevel = (line.match(/^(\s*)/)[1] || '').length / 4;
-                lineContent += `<span style="margin-left: ${indentLevel * 15}px;">${line.trim()}</span>`;
-
-                if (lineIndex < lines.length - 1) {
-                    lineContent += '<br>';
-                }
-            });
-
             const lineElement = document.createElement('div');
             lineElement.classList.add('message-line');
-            lineElement.innerHTML = lineContent;
+            lines.forEach((line, lineIndex) => {
+                const indentLevel = (line.match(/^(\s*)/)[1] || '').length / 4;
+                const spanElement = document.createElement('span');
+                spanElement.style.marginLeft = `${indentLevel * 15}px`;
+                spanElement.textContent = line.trim();
+                
+                lineElement.appendChild(spanElement);
+                
+                if (lineIndex < lines.length - 1) {
+                    lineElement.appendChild(document.createElement('br'));
+                }
+            });
             messageElement.appendChild(lineElement);
         } else {
-            // Code block
             const preElement = document.createElement('pre');
             const codeElement = document.createElement('code');
             codeElement.textContent = segment;
@@ -91,7 +101,6 @@ function displayMessage(text, sender) {
     conversationPlaceholder.appendChild(messageElement);
     conversationPlaceholder.scrollTop = conversationPlaceholder.scrollHeight;
 }
-    
 
 function adjustTextareaHeight(event) {
     if (event.target.id === 'user-input') {
@@ -119,6 +128,14 @@ function getSelectedConversation() {
     return localStorage.getItem('selectedConversation');
 }
 
+function debounce(func, delay) {
+    let timeoutId;
+    return function (...args) {
+        clearTimeout(timeoutId);
+        timeoutId = setTimeout(() => func.apply(this, args), delay);
+    };
+}
+
 function searchConversations(event) {
     const searchTerm = event.target.value.toLowerCase();
     const conversationItems = conversationList.querySelectorAll('li');
@@ -136,13 +153,13 @@ async function loadMoreConversations() {
 }
 
 async function listConversations(page = 1) {
-    const response = await fetch(`http://127.0.0.1:8000/conversations/?page=${page}`);
+    const response = await fetch(`${BASE_URL}/conversations/?page=${page}`);
     const data = await response.json();
-    return data.conversations;
+    return data.conversations.reverse();
 }
 
 async function switchConversation(conversationFile) {
-    await fetch(`http://127.0.0.1:8000/conversations/switch/?conversation_file=${conversationFile}`, { method: 'POST' });
+    await fetch(`${BASE_URL}/conversations/switch/?conversation_file=${conversationFile}`, { method: 'POST' });
     saveSelectedConversation(conversationFile);
     await loadConversation(conversationFile);
 
@@ -154,7 +171,7 @@ async function switchConversation(conversationFile) {
 
 async function loadConversation(conversationFile) {
     try {
-        const response = await fetch(`http://127.0.0.1:8000/conversations/history/?conversation_file=${conversationFile}`);
+        const response = await fetch(`${BASE_URL}/conversations/history/?conversation_file=${conversationFile}`);
         const data = await response.json();
         const messages = data.messages;
 
@@ -166,14 +183,13 @@ async function loadConversation(conversationFile) {
         });
 
         conversationHeader.textContent = conversationFile;
-        conversationPlaceholder.scrollTop = conversationPlaceholder.scrollHeight;
     } catch (error) {
         console.error('Error:', error);
     }
 }
 
 async function createNewConversation() {
-    const response = await fetch('http://127.0.0.1:8000/conversations/new/', { method: 'POST' });
+    const response = await fetch(`${BASE_URL}/conversations/new/`, { method: 'POST' });
     const data = await response.json();
     const conversationFile = data.conversation_file;
     
@@ -186,16 +202,46 @@ async function createNewConversation() {
     }, 3000);
 }
 
+async function deleteConversation(conversationFile) {
+    try {
+        const response = await fetch(`${BASE_URL}/conversations/${conversationFile}`, { method: 'DELETE' });
+        if (response.ok) {
+            await loadConversations();
+            if (getSelectedConversation() === conversationFile) {
+                await createNewConversation();
+            }
+        } else {
+            throw new Error('Failed to delete conversation');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
+
+function createConversationItem(conversation) {
+    const listItem = document.createElement('li');
+    listItem.textContent = conversation;
+    listItem.setAttribute('data-conversation', conversation);
+    listItem.addEventListener('click', () => switchConversation(conversation));
+    
+    const deleteButton = document.createElement('button');
+    deleteButton.innerHTML = '<i class="fas fa-trash-alt"></i>';
+    deleteButton.classList.add('delete-conversation-btn');
+    deleteButton.addEventListener('click', (event) => {
+        event.stopPropagation();
+        deleteConversation(conversation);
+    });
+    
+    listItem.appendChild(deleteButton);
+    return listItem;
+}
 
 async function loadConversations() {
     const conversations = await listConversations();
     conversationList.innerHTML = '';
 
     conversations.forEach(conversation => {
-        const listItem = document.createElement('li');
-        listItem.textContent = conversation;
-        listItem.setAttribute('data-conversation', conversation);
-        listItem.addEventListener('click', () => switchConversation(conversation));
+        const listItem = createConversationItem(conversation);
         conversationList.appendChild(listItem);
     });
 }
@@ -207,6 +253,10 @@ async function loadChat() {
     } else {
         await createNewConversation();
     }
+}
+
+function clearConversation() {
+    conversationPlaceholder.innerHTML = '';
 }
 
 loadConversations();

@@ -73,6 +73,14 @@ async def switch_conversation(conversation_file: str):
     else:
         raise HTTPException(status_code=404, detail="Conversation file not found on S3.")
 
+@app.delete("/conversations/{conversation_file}")
+async def delete_conversation(conversation_file: str):
+    deleted = await conversation_service.delete_conversation(conversation_file)
+    if deleted:
+        return {"message": f"Conversation {conversation_file} deleted successfully."}
+    else:
+        raise HTTPException(status_code=500, detail=f"Failed to delete conversation {conversation_file}.")
+
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8000)

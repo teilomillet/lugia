@@ -13,8 +13,8 @@
         <div id="model-selector">
             <label for="model-dropdown">Select Model:</label>
             <select id="model-dropdown">
-                <option value="claude-3-haiku">Claude-3 Haiku</option>
                 <option value="claude-3-opus">Claude-3 Opus</option>
+                <option value="claude-3-haiku">Claude-3 Haiku</option>
                 <option value="claude-3-sonnet">Claude-3 Sonnet</option>
                 <option value="claude-2">Claude-2</option>
                 <option value="gpt-4">GPT-4</option>
@@ -26,8 +26,9 @@
             </button>
         </div>
         <div class="action-buttons">
-	                <button id="toggle-conversation-manager"><i class="fas fa-bars"></i> Conversation Manager</button>
-	         </div>
+            <button id="toggle-conversation-manager"><i class="fas fa-bars"></i> Conversation Manager</button>
+            <button id="clear-conversation-btn"><i class="fas fa-trash-alt"></i> Clear Conversation</button>
+        </div>
         <div id="main-content">
             <div id="conversation-manager-container">
                 <div class="manager-actions">
@@ -48,7 +49,10 @@
                 <button id="load-more-btn">Load More</button>
             </div>
             <div id="chat-area">
-                <div id="conversation-placeholder"></div>
+                <div id="conversation-placeholder">
+                    <div id="loading-spinner" class="loading-spinner"></div>
+                    <div id="error-message" class="error-message"></div>
+                </div>
                 <div id="input-container">
                     <textarea id="user-input" placeholder="Type your message..."></textarea>
                     <button id="send-btn">Send</button>

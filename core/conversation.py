@@ -97,6 +97,22 @@ class ConversationService:
         except ClientError as e:
             logger.exception(f"Failed to create new conversation file on S3: {e}")
             return None
+    
+    async def delete_conversation(self, conversation_file: str):
+        try:
+            # Delete the conversation from S3
+            self.s3_client.delete_object(Bucket='lugia', Key=f'conversation_history/{conversation_file}')
+            
+            # Delete the conversation from the cache and active conversation
+            if self.active_conversation == conversation_file:
+                self.active_conversation = None
+            if conversation_file in self.conversation_cache:
+                del self.conversation_cache[conversation_file]
+            
+            return True
+        except ClientError as e:
+            logger.exception(f"Failed to delete conversation from S3: {e}")
+            return False
 
     async def switch_conversation(self, conversation_file: str):
         try:
