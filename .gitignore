@@ -1,3 +1,6 @@
+.venv
+__pycache__
+.DS_Store
 .env
 */.env
 */*.log
@@ -6,3 +9,4 @@
 */*/*.json
 */*/*/*.json
 */conversation_history
+

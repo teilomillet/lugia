@@ -2,6 +2,10 @@
 from fastapi import FastAPI, HTTPException
 from core.model import ModelManager
 from core.conversation import ConversationService
+from fastapi.templating import Jinja2Templates
+from fastapi import Request, Depends
+from fastapi.responses import RedirectResponse
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 from loguru import logger
 from config import Config
@@ -20,12 +24,25 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+app.mount("/static", StaticFiles(directory="static"), name="static")
+
 model_manager = ModelManager()
 conversation_service = ConversationService()
+
+templates = Jinja2Templates(directory="www")
+
 
 class ChatRequest(BaseModel):
     model: str
     content: str
+
+@app.get("/")
+async def homepage(request: Request):
+    try:
+        return templates.TemplateResponse("index.html", {"request": request})
+    except Exception as e:
+        logger.error(f"Error rendering the homepage: {str(e)}")
+        raise HTTPException(status_code=500, detail="Internal Server Error")
 
 @app.post("/chat/")
 async def chat(request: ChatRequest):
